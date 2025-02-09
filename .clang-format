@@ -1,0 +1,2198 @@
+# Author:tony.meng
+# Date: 2024.9.18
+# Version: LLVM version 18.1.8
+# Reference:https://clang.llvm.org/docs/ClangFormatStyleOptions.html?spm=5176.28103460.0.0.49e35d277y2AQX
+
+---
+#—————————————————————————————————————1————————————————————————————————————————————————————#
+# 语言: None, Cpp, Java, JavaScript, ObjC, Proto, TableGen, TextProto
+Language: Cpp
+
+#—————————————————————————————————————2————————————————————————————————————————————————————#
+#BasedOnStyle: LLVM|Google|Chromium|Mozilla|WebKit|Microsoft|GNU
+# BasedOnStyle:  LLVM
+
+#—————————————————————————————————————3————————————————————————————————————————————————————#
+# 访问说明符(public、private等)的偏移(缩进或者对齐)
+AccessModifierOffset: -4
+
+#—————————————————————————————————————4————————————————————————————————————————————————————#
+# 开括号(开圆括号、开尖括号、开方括号)后的对齐: Align, DontAlign, AlwaysBreak(总是在开括号后换行)
+AlignAfterOpenBracket: Align
+#————————————————————————————————————————————————————#
+# Align，在开括号之后对齐变量:
+
+# someLongFunction(argument1,
+# argument2);
+#————————————————————————————————————————————————————#
+# DontAlign， 不对齐，换行后使用ContinuationIndentWidth:
+
+# someLongFunction(argument1,
+# argument2);
+#————————————————————————————————————————————————————#
+# AlwaysBreak，一行放不下时，总是在一个开括号之后换行:
+
+# someLongFunction(
+# argument1, argument2);
+#————————————————————————————————————————————————————#
+# BlockIndext，一行放不下时，总是在一个开括号之后换行，且在新行关闭尾括号。 仅限于圆括号:
+
+# someLongFunction(
+# argument1, argument2
+# )
+
+#—————————————————————————————————————5————————————————————————————————————————————————————#
+#对齐结构体数组，当数组的列数相等时，会对齐每行的文本。
+AlignArrayOfStructures: Left
+#————————————————————————————————————————————————————#
+# Left，左对齐列：
+# struct test demo[] =
+# {
+#     {56, 23,    "hello"},
+#     {-1, 93463, "world"},
+#     {7,  5,     "!!"   }
+# };
+#————————————————————————————————————————————————————#
+# Right，右对齐列：
+# struct test demo[] =
+# {
+#     {56,    23, "hello"},
+#     {-1, 93463, "world"},
+#     { 7,     5,    "!!"}
+# };
+#————————————————————————————————————————————————————#
+#使用None表示不用对齐。
+
+#—————————————————————————————————————6————————————————————————————————————————————————————#
+#AlignConsecutiveAssignments 对齐连续赋值
+AlignConsecutiveAssignments:
+    #是否启用 true/false
+    Enabled: false
+
+    #可以跨越空白行进行对齐
+    AcrossEmptyLines: true
+    #————————————————————————————————————————————————————#
+    # true:
+    # int a            = 1;
+    # int somelongname = 2;
+    # double c         = 3;
+
+    # int d            = 3;
+    #————————————————————————————————————————————————————#
+    # false:
+    # int a            = 1;
+    # int somelongname = 2;
+    # double c         = 3;
+
+    # int d = 3;
+
+    #可以跨越注释行进行对齐
+    AcrossComments: true
+    #————————————————————————————————————————————————————#
+    # true:
+    # int d    = 3;
+    # /* A comment. */
+    # double e = 4;
+    #————————————————————————————————————————————————————#
+    # false:
+    # int d = 3;
+    # /* A comment. */
+    # double e = 4;
+
+    #混合运算符与等号组合会对齐于
+    AlignCompound: true
+    #————————————————————————————————————————————————————#
+    # true:
+    # a   &= 2;
+    # bbb  = 2;
+    #————————————————————————————————————————————————————#
+    # false:
+    # a &= 2;
+    # bbb = 2;
+
+    #该属性未启用
+    AlignFunctionPointers: false
+
+    #混合运算符填补对齐到所有左值的最右边边界。
+    PadOperators: true
+#————————————————————————————————————————————————————#
+# true:
+# a   >>= 2;
+# bbb   = 2;
+
+# a     = 2;
+# bbb >>= 2;
+#————————————————————————————————————————————————————#
+# false:
+# a >>= 2;
+# bbb = 2;
+
+# a     = 2;
+# bbb >>= 2;
+
+#—————————————————————————————————————7————————————————————————————————————————————————————#
+#位段对齐
+AlignConsecutiveBitFields:
+    Enabled: false
+    AcrossEmptyLines: true
+    AcrossComments: true
+    #该属性未启用
+    AlignCompound: false
+    #该属性未启用
+    AlignFunctionPointers: false
+    #该属性未启用
+    PadOperators: false
+#效果：
+# struct aa {
+#   int test : 4;
+#   int b    : 5;
+#   int c    : 8;
+# };
+#其余子选项含义与AlignConsecutiveAssignments类似
+
+#—————————————————————————————————————8————————————————————————————————————————————————————#
+#连续声明对齐
+AlignConsecutiveDeclarations:
+    Enabled: false
+    AcrossEmptyLines: false
+    AcrossComments: false
+    #该属性未启用
+    AlignCompound: false
+    #该属性未启用
+    AlignFunctionPointers: false
+    #该属性未启用
+    PadOperators: false
+#效果：
+# int         aaaa = 12;
+# float       b    = 23;
+# std::string ccc;
+# const char  hexdigits[] = "0123456789abcdef";
+# void        Ipv6_deal(const uint16_t *a);
+
+# int main(const uint16_t *a, const uint16_t *k) { ... }
+#其余子选项含义与AlignConsecutiveAssignments类似
+
+#—————————————————————————————————————9————————————————————————————————————————————————————#
+#连续宏定义对齐
+AlignConsecutiveMacros:
+    Enabled: true
+    AcrossEmptyLines: false
+    AcrossComments: true
+    #该属性未启用
+    AlignCompound: false
+    #该属性未启用
+    AlignFunctionPointers: false
+    #该属性未启用
+    PadOperators: false
+#效果：
+#define SHORT_NAME       42
+#define LONGER_NAME      0x007f
+#define EVEN_LONGER_NAME (2)
+#define foo(x)           (x * x)
+#define bar(y, z)        (y + z)
+
+#其余子选项含义与AlignConsecutiveAssignments类似
+
+#—————————————————————————————————————10————————————————————————————————————————————————————#
+#switch 语句中连续的简短 case格式化
+AlignConsecutiveShortCaseStatements:
+    Enabled: true
+    #————————————————————————————————————————————————————#
+    #true:
+    # switch (level) {
+    # case log::info:    return "info:";
+    # case log::warning: return "warning:";
+    # default:           return "";
+    # }
+    #————————————————————————————————————————————————————#
+    # false:
+    # switch (level) {
+    # case log::info: return "info:";
+    # case log::warning: return "warning:";
+    # default: return "";
+    # }
+
+    AcrossEmptyLines: true
+    #————————————————————————————————————————————————————#
+    # true:
+    # switch (level) {
+    # case log::info:    return "info:";
+    # case log::warning: return "warning:";
+
+    # default:           return "";
+    # }
+    #————————————————————————————————————————————————————#
+    # false:
+    # switch (level) {
+    # case log::info:    return "info:";
+    # case log::warning: return "warning:";
+
+    # default: return "";
+    # }
+
+    AcrossComments: true
+
+    #冒号对齐
+    AlignCaseColons: true
+#————————————————————————————————————————————————————#
+# true:
+# switch (level) {
+# case log::info   : return "info:";
+# case log::warning: return "warning:";
+# default          : return "";
+# }
+#————————————————————————————————————————————————————#
+# false:
+# switch (level) {
+# case log::info:    return "info:";
+# case log::warning: return "warning:";
+# default:           return "";
+# }
+
+#—————————————————————————————————————11————————————————————————————————————————————————————#
+#对齐分割语法行的斜杠符\  DontAlign、Left、Right
+AlignEscapedNewlines: DontAlign
+#————————————————————————————————————————————————————#
+#DontAlign：
+# #define A \
+#   int aaaa; \
+#   int b; \
+#   int dddddddddd;
+#————————————————————————————————————————————————————#
+#Left：
+# #define A   \
+#   int aaaa; \
+#   int b;    \
+#   int dddddddddd;
+#————————————————————————————————————————————————————#
+#Right:
+# #define A                                                                      \
+#   int aaaa;                                                                    \
+#   int b;                                                                       \
+#   int dddddddddd;
+
+#—————————————————————————————————————12————————————————————————————————————————————————————#
+
+#竖直对齐表达式的操作数 DontAlign，Align，AlignAfterOperator
+AlignOperands: Align
+#————————————————————————————————————————————————————#
+# Align:
+# int aaa = bbbbbbbbbbbbbbb +
+#           ccccccccccccccc;
+#————————————————————————————————————————————————————#
+# AlignAfterOperators:
+# int aaa = bbbbbbbbbbbbbbb
+#         + ccccccccccccccc;
+
+#—————————————————————————————————————13————————————————————————————————————————————————————#
+#注释对齐 Leave Always Never
+AlignTrailingComments:
+    Kind: Always
+    #跨越的空行数对齐 (当是1的时候，中间有1个空行，注释依然对齐)
+    OverEmptyLines: 1
+#————————————————————————————————————————————————————#
+# Leave:
+# int a;    // comment
+# int ab;       // comment
+
+# int abc;  // comment
+# int abcd;     // comment
+#————————————————————————————————————————————————————#
+# Always:
+# int a;  // comment
+# int ab; // comment
+
+# int abc;  // comment
+# int abcd; // comment
+#————————————————————————————————————————————————————#
+# Never:
+# int a; // comment
+# int ab; // comment
+
+# int abc; // comment
+# int abcd; // comment
+#—————————————————————————————————————14————————————————————————————————————————————————————#
+#允许所有的参数放在下一行
+AllowAllArgumentsOnNextLine: true
+#————————————————————————————————————————————————————#
+# true:
+# callFunction(
+#     a, b, c, d);
+#————————————————————————————————————————————————————#
+# false:
+# callFunction(a,
+#              b,
+#              c,
+#              d);
+
+#—————————————————————————————————————15————————————————————————————————————————————————————#
+#允许所有的声明放在下一行
+AllowAllParametersOfDeclarationOnNextLine: true
+#————————————————————————————————————————————————————#
+# true:
+# void myFunction(
+#     int a, int b, int c, int d, int e);
+#————————————————————————————————————————————————————#
+# false:
+# void myFunction(int a,
+#                 int b,
+#                 int c,
+#                 int d,
+#                 int e);
+
+#—————————————————————————————————————16————————————————————————————————————————————————————#
+#除指定符外，不允许在noexcept之前中断
+AllowBreakBeforeNoexceptSpecifier: Never
+#————————————————————————————————————————————————————#
+# Never:
+# void foo(int arg1,
+#          double arg2) noexcept;
+
+# void bar(int arg1, double arg2) noexcept(
+#     noexcept(baz(arg1)) &&
+#     noexcept(baz(arg2)));
+#————————————————————————————————————————————————————#
+# OnlyWithParen:
+# void foo(int arg1,
+#          double arg2) noexcept;
+
+# void bar(int arg1, double arg2)
+#     noexcept(noexcept(baz(arg1)) &&
+#              noexcept(baz(arg2)));
+#————————————————————————————————————————————————————#
+# Always:
+# void foo(int arg1,
+#          double arg2) noexcept;
+
+# void bar(int arg1, double arg2)
+#     noexcept(noexcept(baz(arg1)) &&
+#              noexcept(baz(arg2)));
+
+#—————————————————————————————————————17————————————————————————————————————————————————————#
+#允许将短语句放在一行上
+AllowShortBlocksOnASingleLine: Empty
+#————————————————————————————————————————————————————#
+# Never:
+# while (true) {
+# }
+# while (true) {
+#   continue;
+# }
+#————————————————————————————————————————————————————#
+# Empty:
+# while (true) {}
+# while (true) {
+#   continue;
+# }
+#————————————————————————————————————————————————————#
+# Always:
+# while (true) {}
+# while (true) { continue; }
+
+#—————————————————————————————————————18————————————————————————————————————————————————————#
+#允许case结构中的语句在同一行
+AllowShortCaseLabelsOnASingleLine: true
+# true:                                   false:
+# switch (a) {                    vs.     switch (a) {
+# case 1: x = 1; break;                   case 1:
+# case 2: return;                           x = 1;
+# }                                         break;
+#                                         case 2:
+#                                           return;
+#                                         }
+
+#—————————————————————————————————————19————————————————————————————————————————————————————#
+#允许将短的符合条件放在同一行上
+AllowShortCompoundRequirementOnASingleLine: true
+#————————————————————————————————————————————————————#
+# true:
+# template <typename T>
+# concept c = requires(T x) {
+#   { x + 1 } -> std::same_as<int>;
+# };
+#————————————————————————————————————————————————————#
+# false:
+# template <typename T>
+# concept c = requires(T x) {
+#   {
+#     x + 1
+#   } -> std::same_as<int>;
+# };
+
+#—————————————————————————————————————20————————————————————————————————————————————————————#
+#允许将短的枚举放在同一行上
+AllowShortEnumsOnASingleLine: true
+#————————————————————————————————————————————————————#
+# true:
+# enum { A, B } myEnum;
+#————————————————————————————————————————————————————#
+# false:
+# enum {
+#   A,
+#   B
+# } myEnum;
+
+#—————————————————————————————————————21————————————————————————————————————————————————————#
+#允许将短的函数放在一行上 None InlineOnly Empty Inline All
+AllowShortFunctionsOnASingleLine: Empty
+#————————————————————————————————————————————————————#
+# InlineOnly:
+# class Foo {
+#   void f() { foo(); }
+# };
+# void f() {
+#   foo();
+# }
+# void f() {
+# }
+#————————————————————————————————————————————————————#
+# Empty:
+# void f() {}
+# void f2() {
+#   bar2();
+# }
+#————————————————————————————————————————————————————#
+# Inline:
+# class Foo {
+#   void f() { foo(); }
+# };
+# void f() {
+#   foo();
+# }
+# void f() {}
+#————————————————————————————————————————————————————#
+# All:
+# class Foo {
+#   void f() { foo(); }
+# };
+# void f() { bar(); }
+
+#—————————————————————————————————————22————————————————————————————————————————————————————#
+#允许将短的return 放在同一行 Never WithoutElse OnlyFirstIf AllIfsAndElse
+AllowShortIfStatementsOnASingleLine: AllIfsAndElse
+#————————————————————————————————————————————————————#
+# Never:
+# if (a)
+#   return;
+
+# if (b)
+#   return;
+# else
+#   return;
+
+# if (c)
+#   return;
+# else {
+#   return;
+# }
+#————————————————————————————————————————————————————#
+# WithoutElse:
+# if (a) return;
+
+# if (b)
+#   return;
+# else
+#   return;
+
+# if (c)
+#   return;
+# else {
+#   return;
+# }
+#————————————————————————————————————————————————————#
+# OnlyFirstIf:
+# if (a) return;
+
+# if (b) return;
+# else if (b)
+#   return;
+# else
+#   return;
+
+# if (c) return;
+# else {
+#   return;
+# }
+#————————————————————————————————————————————————————#
+# AllIfsAndElse:
+# if (a) return;
+
+# if (b) return;
+# else return;
+
+# if (c) return;
+# else {
+#   return;
+# }
+
+#—————————————————————————————————————23————————————————————————————————————————————————————#
+#允许将短的lambda语句放在同一行 None  Empty Inline All
+AllowShortLambdasOnASingleLine: All
+#————————————————————————————————————————————————————#
+# Empty:
+# auto lambda = [](int a) {};
+# auto lambda2 = [](int a) {
+#     return a;
+# };
+#————————————————————————————————————————————————————#
+# Inline:
+# auto lambda = [](int x, int y) {
+#     return x < y;
+# };
+# sort(a.begin(), a.end(), [](int x, int y) { return x < y; });
+#————————————————————————————————————————————————————#
+# All:
+# auto lambda = [](int a) {};
+# auto lambda2 = [](int a) { return a; };
+
+#—————————————————————————————————————24————————————————————————————————————————————————————#
+#允许将 while(true) continue放在同一行  true false
+AllowShortLoopsOnASingleLine: true
+
+#—————————————————————————————————————25————————————————————————————————————————————————————#
+#此选项已弃用
+AlwaysBreakAfterDefinitionReturnType: None
+
+#—————————————————————————————————————26————————————————————————————————————————————————————#
+#此选项已弃用
+AlwaysBreakAfterReturnType: None
+
+#—————————————————————————————————————27————————————————————————————————————————————————————#
+
+#允许将多行字符串放在下一行进行排版
+AlwaysBreakBeforeMultilineStrings: false
+# true:                                  false:
+# aaaa =                         vs.     aaaa = "bbbb"
+#     "bbbb"                                    "cccc";
+#     "cccc";
+
+#—————————————————————————————————————28————————————————————————————————————————————————————#
+#此选项已弃用
+AlwaysBreakTemplateDeclarations: MultiLine
+#—————————————————————————————————————-————————————————————————————————————————————————————#
+#该选项用于定义一组宏名，这些宏名在代码中出现时应该被解释为属性或限定符，而不是普通的标识符。
+# 这可以用于语言扩展或静态分析注解等用途。
+# 当 clang-format 格式化代码时，它会对这些宏按照属性的规则进行处理。
+# __capability, __output, __unused
+
+AttributeMacros:
+    - __capability
+
+#—————————————————————————————————————29————————————————————————————————————————————————————#
+#如果为false，在函数中的参数要么全在一行要么全在不同行
+BinPackArguments: true
+#————————————————————————————————————————————————————#
+# true:
+# void f() {
+#   f(aaaaaaaaaaaaaaaaaaaa, aaaaaaaaaaaaaaaaaaaa,
+#     aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa);
+# }
+#————————————————————————————————————————————————————#
+# false:
+# void f() {
+#   f(aaaaaaaaaaaaaaaaaaaa,
+#     aaaaaaaaaaaaaaaaaaaa,
+#     aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa);
+# }
+
+#—————————————————————————————————————30————————————————————————————————————————————————————#
+#如果为false， 函数声明或函数定义的参数将都在同一行上，或各有一行。
+BinPackParameters: false
+
+#—————————————————————————————————————31————————————————————————————————————————————————————#
+#位字段冒号间距样式 Both None Before After
+BitFieldColonSpacing: Both
+#————————————————————————————————————————————————————#
+# Both: 冒号前后都空一格
+# unsigned bf : 2;
+#————————————————————————————————————————————————————#
+# None: 冒号前后都不空格
+# unsigned bf:2;
+#————————————————————————————————————————————————————#
+# Before: 冒号前空格
+# unsigned bf :2;
+#————————————————————————————————————————————————————#
+# After: 冒号后空格
+# unsigned bf: 2;
+
+#—————————————————————————————————————32————————————————————————————————————————————————————#
+#花括号 {} 位置
+#若 BreakBeforeBraces 选项被设置为 Custom，则使用下列选项来确定花括号位置，否则忽略
+BraceWrapping:
+    #case 语句的花括号
+    AfterCaseLabel: false
+    #   false:                                true:
+    # switch (foo) {                vs.     switch (foo) {
+    #   case 1: {                             case 1:
+    #     bar();                              {
+    #     break;                                bar();
+    #   }                                       break;
+    #   default: {                            }
+    #     plop();                             default:
+    #   }                                     {
+    # }                                         plop();
+    #                                         }
+    #                                       }
+
+    #类后的花括号
+    AfterClass: false
+    #————————————————————————————————————————————————————#
+    # true:
+    # class foo
+    # {};
+    #————————————————————————————————————————————————————#
+    # false:
+    # class foo {};
+
+    #控制语句的花括号
+    AfterControlStatement: Never
+    #————————————————————————————————————————————————————#
+    # Never：
+    # if (foo()) {
+    # } else {
+    # }
+    # for (int i = 0; i < 10; ++i) {
+    # }
+    #————————————————————————————————————————————————————#
+    # MultiLine
+    # if (foo && bar &&
+    #     baz)
+    # {
+    #   quux();
+    # }
+    # while (foo || bar) {
+    # }
+    #————————————————————————————————————————————————————#
+    # Always
+    # if (foo())
+    # {
+    # } else
+    # {}
+    # for (int i = 0; i < 10; ++i)
+    # {}
+
+    #枚举后的花括号
+    AfterEnum: false
+    #————————————————————————————————————————————————————#
+    #   true:
+    # enum X : int
+    # {
+    #   B
+    # };
+    #————————————————————————————————————————————————————#
+    # false:
+    # enum X : int { B };
+
+    #extern 后的花括号
+    AfterExternBlock: false
+    #————————————————————————————————————————————————————#
+    # true:
+    # extern "C"
+    # {
+    #   int foo();
+    # }
+    #————————————————————————————————————————————————————#
+    # false:
+    # extern "C" {
+    # int foo();
+    # }
+
+    #函数后的花括号
+    AfterFunction: false
+    #————————————————————————————————————————————————————#
+    # true:
+    # void foo()
+    # {
+    #   bar();
+    #   bar2();
+    # }
+    #————————————————————————————————————————————————————#
+    # false:
+    # void foo() {
+    #   bar();
+    #   bar2();
+    # }
+
+    #命名空间后的花括号
+    AfterNamespace: false
+    #————————————————————————————————————————————————————#
+    # true:
+    # namespace
+    # {
+    # int foo();
+    # int bar();
+    # }
+    #————————————————————————————————————————————————————#
+    # false:
+    # namespace {
+    # int foo();
+    # int bar();
+    # }
+
+    #ObjC 的花括号
+    AfterObjCDeclaration: false
+
+    #结构体花括号
+    AfterStruct: false
+    #————————————————————————————————————————————————————#
+    # true:
+    # struct foo
+    # {
+    #   int x;
+    # };
+    #————————————————————————————————————————————————————#
+    # false:
+    # struct foo {
+    #   int x;
+    # };
+
+    #联合体的花括号
+    AfterUnion: false
+    #————————————————————————————————————————————————————#
+    # true:
+    # union foo
+    # {
+    #   int x;
+    # }
+    #————————————————————————————————————————————————————#
+    # false:
+    # union foo {
+    #   int x;
+    # }
+
+    #catch 前的花括号
+    BeforeCatch: false
+    #————————————————————————————————————————————————————#
+    # true:
+    # try {
+    #   foo();
+    # }
+    # catch () {
+    # }
+    #————————————————————————————————————————————————————#
+    # false:
+    # try {
+    #   foo();
+    # } catch () {
+
+    #else前的花括号
+    BeforeElse: false
+    #————————————————————————————————————————————————————#
+    # true:
+    # if (foo()) {
+    # }
+    # else {
+    # }
+    #————————————————————————————————————————————————————#
+    # false:
+    # if (foo()) {
+    # } else {
+    # }
+
+    #lambda前的花括号
+    BeforeLambdaBody: false
+    #————————————————————————————————————————————————————#
+    # true:
+    # connect(
+    #   []()
+    #   {
+    #     foo();
+    #     bar();
+    #   });
+    #————————————————————————————————————————————————————#
+    # false:
+    # connect([]() {
+    #   foo();
+    #   bar();
+    # });
+
+    #while前的花括号
+    BeforeWhile: false
+    #————————————————————————————————————————————————————#
+    # true:
+    # do {
+    #   foo();
+    # }
+    # while (1);
+    #————————————————————————————————————————————————————#
+    # false:
+    # do {
+    #   foo();
+    # } while (1);
+
+    #花括号缩进
+    IndentBraces: false
+    #分割空函数
+    SplitEmptyFunction: false
+    # false:          true:
+    # int f()   vs.   int f()
+    # {}              {
+    #                 }
+
+    #分割空class
+    SplitEmptyRecord: false
+    # false:           true:
+    # class Foo   vs.  class Foo
+    # {}               {
+    #                  }
+
+    #分割空命名空间
+    SplitEmptyNamespace: false
+# false:               true:
+# namespace Foo   vs.  namespace Foo
+# {}                   {
+#                      }
+
+#—————————————————————————————————————33————————————————————————————————————————————————————#
+#相邻字符串文字之间是否换行
+BreakAdjacentStringLiterals: false
+#————————————————————————————————————————————————————#
+# true:
+# return "Code"
+#        "\0\52\26\55\55\0"
+#        "x013"
+#        "\02\xBA";
+#————————————————————————————————————————————————————#
+# false:
+# return "Code" "\0\52\26\55\55\0" "x013" "\02\xBA";
+
+#—————————————————————————————————————34————————————————————————————————————————————————————#
+#c++ 中属性是否换行 Always  Leave Never
+BreakAfterAttributes: Leave
+#————————————————————————————————————————————————————#
+# Always:
+# [[maybe_unused]]
+# const int i;
+# [[gnu::const]] [[maybe_unused]]
+# int j;
+
+# [[nodiscard]]
+# inline int f();
+# [[gnu::const]] [[nodiscard]]
+# int g();
+
+# [[likely]]
+# if (a)
+#   f();
+# else
+#   g();
+
+# switch (b) {
+# [[unlikely]]
+# case 1:
+#   ++b;
+#   break;
+# [[likely]]
+# default:
+#   return;
+# }
+#————————————————————————————————————————————————————#
+# Leave:
+# [[maybe_unused]] const int i;
+# [[gnu::const]] [[maybe_unused]]
+# int j;
+
+# [[nodiscard]] inline int f();
+# [[gnu::const]] [[nodiscard]]
+# int g();
+
+# [[likely]] if (a)
+#   f();
+# else
+#   g();
+
+# switch (b) {
+# [[unlikely]] case 1:
+#   ++b;
+#   break;
+# [[likely]]
+# default:
+#   return;
+# }
+#————————————————————————————————————————————————————#
+# Never:
+# [[maybe_unused]] const int i;
+# [[gnu::const]] [[maybe_unused]] int j;
+
+# [[nodiscard]] inline int f();
+# [[gnu::const]] [[nodiscard]] int g();
+
+# [[likely]] if (a)
+#   f();
+# else
+#   g();
+
+# switch (b) {
+# [[unlikely]] case 1:
+#   ++b;
+#   break;
+# [[likely]] default:
+#   return;
+# }
+
+#—————————————————————————————————————35————————————————————————————————————————————————————#
+#java字段换行
+BreakAfterJavaFieldAnnotations: false
+# true:                                  false:
+# @Partial                       vs.     @Partial @Mock DataLoad loader;
+# @Mock
+# DataLoad loader;
+
+#—————————————————————————————————————36————————————————————————————————————————————————————#
+#json 数组换行
+BreakArrays: false
+# true:                                  false:
+# [                          vs.      [1, 2, 3, 4]
+#   1,
+#   2,
+#   3,
+#   4
+# ]
+
+#—————————————————————————————————————37————————————————————————————————————————————————————#
+#二元运算符的换行
+BreakBeforeBinaryOperators: None
+#————————————————————————————————————————————————————#
+# None: 在运算符之前换行
+# LooooooooooongType loooooooooooooooooooooongVariable =
+#     someLooooooooooooooooongFunction();
+
+# bool value = aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa +
+#                      aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa ==
+#                  aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa &&
+#              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa >
+#                  ccccccccccccccccccccccccccccccccccccccccc;
+#————————————————————————————————————————————————————#
+# NonAssignment 在非赋值运算符之前换行
+# LooooooooooongType loooooooooooooooooooooongVariable =
+#     someLooooooooooooooooongFunction();
+
+# bool value = aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+#                      + aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+#                  == aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+#              && aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+#                     > ccccccccccccccccccccccccccccccccccccccccc;
+#————————————————————————————————————————————————————#
+# All 所有运算符之前都换行
+# LooooooooooongType loooooooooooooooooooooongVariable
+#     = someLooooooooooooooooongFunction();
+
+# bool value = aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+#                      + aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+#                  == aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+#              && aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+#                     > ccccccccccccccccccccccccccccccccccccccccc;
+
+#—————————————————————————————————————38————————————————————————————————————————————————————#
+#概念声明之前是否换行
+BreakBeforeConceptDeclarations: Always
+#————————————————————————————————————————————————————#
+# Never
+# template <typename T> concept C = ...;
+#————————————————————————————————————————————————————#
+# Always
+# template <typename T>
+# concept C = ...;
+
+#—————————————————————————————————————39————————————————————————————————————————————————————#
+#花括号换行方式  Attach Linux Mozilla Stroustrup Allman Whitesmiths GNU WebKit Custom
+BreakBeforeBraces: Custom
+
+#—————————————————————————————————————40————————————————————————————————————————————————————#
+#内联的ASM冒号样式
+BreakBeforeInlineASMColon: OnlyMultiline
+#————————————————————————————————————————————————————#
+# Never
+# asm volatile("string", : : val);
+#————————————————————————————————————————————————————#
+# OnlyMultiline
+# asm volatile("string", : : val);
+# asm("cmoveq %1, %2, %[result]"
+#     : [result] "=r"(result)
+#     : "r"(test), "r"(new), "[result]"(old));
+#————————————————————————————————————————————————————#
+# Always
+# asm volatile("string",
+#              :
+#              : val);
+#—————————————————————————————————————41————————————————————————————————————————————————————#
+#三元运算符样式 如果为true,则放在换行之后
+BreakBeforeTernaryOperators: false
+#————————————————————————————————————————————————————#
+# true:
+# veryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongDescription
+#     ? firstValue
+#     : SecondValueVeryVeryVeryVeryLong;
+#————————————————————————————————————————————————————#
+# false:
+# veryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongDescription ?
+#     firstValue :
+#     SecondValueVeryVeryVeryVeryLong;
+
+#—————————————————————————————————————42————————————————————————————————————————————————————#
+#构造器初始化的换行
+BreakConstructorInitializers: BeforeColon
+#————————————————————————————————————————————————————#
+# BeforeColon:
+# Constructor()
+#     : initializer1(),
+#       initializer2()
+#————————————————————————————————————————————————————#
+# BeforeComma:
+# Constructor()
+#     : initializer1()
+#     , initializer2()
+#————————————————————————————————————————————————————#
+# AfterColon:
+# Constructor() :
+#     initializer1(),
+#     initializer2()
+#—————————————————————————————————————43————————————————————————————————————————————————————#
+#类声明中的继承列表是否应该被换行
+BreakInheritanceList: BeforeColon
+#————————————————————————————————————————————————————#
+#  BeforeColon
+# class Foo
+#     : Base1,
+#       Base2
+# {};
+#————————————————————————————————————————————————————#
+# BeforeComma
+# class Foo
+#     : Base1
+#     , Base2
+# {};
+#————————————————————————————————————————————————————#
+#AfterColon
+# class Foo :
+#     Base1,
+#     Base2
+# {};
+#————————————————————————————————————————————————————#
+#AfterComma
+# class Foo : Base1,
+#             Base2
+# {};
+
+#—————————————————————————————————————44————————————————————————————————————————————————————#
+#长字符串字面量是否应该被拆分成多行
+BreakStringLiterals: true
+#————————————————————————————————————————————————————#
+# true:
+# const char* x = "veryVeryVeryVeryVeryVe"
+#                 "ryVeryVeryVeryVeryVery"
+#                 "VeryLongString";
+#————————————————————————————————————————————————————#
+# false:
+# const char* x =
+#     "veryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongString";
+
+#—————————————————————————————————————45————————————————————————————————————————————————————#
+#列限制，即一行最多可以显示的字符个数，多于该数字则会自动换行，0表示无限制
+ColumnLimit: 0
+
+#—————————————————————————————————————46————————————————————————————————————————————————————#
+#是否在预处理器指令前添加注释
+CommentPragmas: "^ IWYU pragma:"
+
+#—————————————————————————————————————47————————————————————————————————————————————————————#
+#命名空间内的声明是否应该紧凑地排列在一起
+CompactNamespaces: false
+#————————————————————————————————————————————————————#
+# true:
+# namespace Foo { namespace Bar {
+# }}
+#————————————————————————————————————————————————————#
+# false:
+# namespace Foo {
+# namespace Bar {
+# }
+# }
+
+#—————————————————————————————————————48————————————————————————————————————————————————————#
+#构造函数初始化列表的缩进宽度
+ConstructorInitializerIndentWidth: 4
+# MyClass::MyClass(int x, int y)
+#     : member1(x),
+#       member2(y) {
+#     // ...
+# }
+
+#—————————————————————————————————————49————————————————————————————————————————————————————#
+#多行语句的后续行相对于前一行的缩进宽度
+ContinuationIndentWidth: 4
+# int i =           //  VeryVeryVeryVeryVeryLongComment
+#     longFunction( // Again a long comment
+#         arg);
+
+#—————————————————————————————————————50————————————————————————————————————————————————————#
+#将带括号列表格式化为最适合C++11带括号列表的格式。
+Cpp11BracedListStyle: false
+
+# true:                                  false:
+# vector<int> x{1, 2, 3, 4};     vs.     vector<int> x{ 1, 2, 3, 4 };
+# vector<T> x{{}, {}, {}, {}};           vector<T> x{ {}, {}, {}, {} };
+# f(MyMap[{composite, key}]);            f(MyMap[{ composite, key }]);
+# new int[3]{1, 2, 3};                   new int[3]{ 1, 2, 3 };
+#—————————————————————————————————————51————————————————————————————————————————————————————#
+#指针符号（* &）的调整方式
+#true 表示跟随不同的上下文来决定其最佳位置，false表示遵循默认的行为，即紧挨着类型名
+DerivePointerAlignment: false
+
+#—————————————————————————————————————52————————————————————————————————————————————————————#
+#完全禁用格式化
+DisableFormat: false
+
+#—————————————————————————————————————53————————————————————————————————————————————————————#
+#控制类或结构体定义中访问修饰符（如 public、protected 和 private）之后是否添加空行。 Never,Always,Leave
+EmptyLineAfterAccessModifier: Never
+#————————————————————————————————————————————————————#
+#Leave:不采取任何操作
+#————————————————————————————————————————————————————#
+# Never:
+# struct foo {
+# private:
+#   int i;
+# protected:
+#   int j;
+#   /* comment */
+# public:
+#   foo() {}
+# private:
+# protected:
+# };
+#————————————————————————————————————————————————————#
+# Always:
+# struct foo {
+# private:
+
+#   int i;
+# protected:
+
+#   int j;
+#   /* comment */
+# public:
+
+#   foo() {}
+# private:
+
+# protected:
+
+# };
+
+#—————————————————————————————————————54————————————————————————————————————————————————————#
+#控制类或结构体定义中访问修饰符（如 public、protected 和 private）之前是否添加空行。
+EmptyLineBeforeAccessModifier: Always
+#————————————————————————————————————————————————————#
+# Never:
+
+# struct foo {
+# private:
+#   int i;
+# protected:
+#   int j;
+#   /* comment */
+# public:
+#   foo() {}
+# private:
+# protected:
+# };
+#————————————————————————————————————————————————————#
+# Leave:不采取操作
+#————————————————————————————————————————————————————#
+# LogicalBlock:仅当访问修饰符启动新的逻辑块时才添加空行。逻辑块是一组一个或多个成员字段或函数。
+
+# struct foo {
+# private:
+#   int i;
+
+# protected:
+#   int j;
+#   /* comment */
+# public:
+#   foo() {}
+
+# private:
+# protected:
+# };
+
+#————————————————————————————————————————————————————#
+# Always:
+
+# struct foo {
+# private:
+#   int i;
+
+# protected:
+#   int j;
+#   /* comment */
+
+# public:
+#   foo() {}
+
+# private:
+
+# protected:
+# };
+
+#—————————————————————————————————————55————————————————————————————————————————————————————#
+#自动检测并优化某些类型的代码布局,特别是在长参数列表或初始化列表需要换行的情况下。
+ExperimentalAutoDetectBinPacking: false
+
+#—————————————————————————————————————56————————————————————————————————————————————————————#
+#如果为true，clang-format会为命名空间添加缺失的命名空间结束注释，并修复无效的现有注释。这不会影响由ShortNamespaceLines控制的短命名空间。
+FixNamespaceComments: true
+
+# true:                                  false:
+# namespace longNamespace {      vs.     namespace longNamespace {
+# void foo();                            void foo();
+# void bar();                            void bar();
+# } // namespace a                       }
+# namespace shortNamespace {             namespace shortNamespace {
+# void baz();                            void baz();
+# }                                      }
+
+#—————————————————————————————————————57————————————————————————————————————————————————————#
+#用于控制宏展开时的格式化，特别是与 foreach 宏类似的迭代宏。
+#这个选项允许你指定哪些宏应该被视为迭代宏，并按照迭代宏的格式化规则进行处理。
+ForEachMacros:
+    - foreach
+    - Q_FOREACH
+    - BOOST_FOREACH
+
+#—————————————————————————————————————58————————————————————————————————————————————————————#
+#选项用于控制预处理器条件编译指令的格式化。当你在 IfMacros 下列出特定的宏时，.clang-format
+#会将这些宏视为条件编译指令，并按照条件编译指令的格式化规则来处理它们。
+IfMacros:
+    - KJ_IF_MAYBE
+
+#—————————————————————————————————————59————————————————————————————————————————————————————#
+IncludeBlocks: Regroup
+#选项用于控制头文件包含块的格式化。
+#这个选项允许你指定一组头文件包含应该被分组在一起，并按照一定的顺序进行排列。
+#————————————————————————————————————————————————————#
+#Preserve:
+#include "b.h"               into      #include "b.h"
+
+#include <lib/main.h>                  #include "a.h"
+#include "a.h"                         #include <lib/main.h>
+#————————————————————————————————————————————————————#
+#Merge:
+#include "b.h"               into      #include "a.h"
+#include "b.h"
+#include <lib/main.h>                  #include <lib/main.h>
+#include "a.h"
+#————————————————————————————————————————————————————#
+#Regroup:
+
+#include "b.h"               into      #include "a.h"
+#include "b.h"
+#include <lib/main.h>
+#include "a.h"                         #include <lib/main.h>
+
+#—————————————————————————————————————60————————————————————————————————————————————————————#
+#于控制头文件包含的分类和排序。这个选项允许你定义一组规则，按照这些规则对头文件包含进行分组和排序
+IncludeCategories:
+    - Regex: '^"(llvm|llvm-c|clang|clang-c)/'
+      Priority: 1
+      SortPriority: 0
+      CaseSensitive: false
+    - Regex: '^(<|"(gtest|gmock|isl|json)/)'
+      Priority: 2
+      SortPriority: 0
+      CaseSensitive: false
+    - Regex: ".*"
+      Priority: 3
+      SortPriority: 0
+      CaseSensitive: false
+
+#—————————————————————————————————————61————————————————————————————————————————————————————#
+# IncludeIsMainRegex 选项用于控制哪些头文件包含应该被视为“主”头文件。
+# 这个选项允许你指定一个正则表达式，用于匹配那些被认为是“主”头文件的包含声明。
+# 当一个头文件被视为“主”头文件时，.clang-format 会在格式化时给予特别处理。
+IncludeIsMainRegex: "(Test)?$"
+
+#—————————————————————————————————————62————————————————————————————————————————————————————#
+#  IncludeIsMainSourceRegex 选项用于控制哪些源文件包含应该被视为“主”源文件。
+#  这个选项允许你指定一个正则表达式，用于匹配那些被认为是“主”源文件的包含声明。
+#  当一个源文件被视为“主”源文件时，.clang-format 会在格式化时给予特别处理，
+#  通常是在某些情况下将这些包含放在特定的位置。
+IncludeIsMainSourceRegex: ""
+
+#—————————————————————————————————————63————————————————————————————————————————————————————#
+#控制类或结构体定义中的访问修饰符（如 public、protected 和 private）的缩进方式。这个选项决定了类成员声明前的访问修饰符是否应该缩进。
+IndentAccessModifiers: false
+
+# false:                                 true:
+# class C {                      vs.     class C {
+#   class D {                                class D {
+#     void bar();                                void bar();
+#   protected:                                 protected:
+#     D();                                       D();
+#   };                                       };
+# public:                                  public:
+#   C();                                     C();
+# };                                     };
+# void foo() {                           void foo() {
+#   return 1;                              return 1;
+# }                                      }
+
+#—————————————————————————————————————64————————————————————————————————————————————————————#
+#是否缩进块case中的块代码
+IndentCaseBlocks: false
+# false:                                 true:
+# switch (fool) {                vs.     switch (fool) {
+# case 1: {                              case 1:
+#   bar();                                 {
+# } break;                                   bar();
+# default: {                               }
+#   plop();                                break;
+# }                                      default:
+# }                                        {
+#                                            plop();
+#                                          }
+#                                        }
+
+#—————————————————————————————————————65————————————————————————————————————————————————————#
+IndentCaseLabels: true
+#是否将case 缩进
+# false:                                 true:
+# switch (fool) {                vs.     switch (fool) {
+# case 1:                                  case 1:
+#   bar();                                   bar();
+#   break;                                   break;
+# default:                                 default:
+#   plop();                                  plop();
+# }                                      }
+
+#—————————————————————————————————————66————————————————————————————————————————————————————#
+IndentExternBlock: Indent
+#extern 块的样式
+#————————————————————————————————————————————————————#
+# IndentExternBlock: AfterExternBlock
+# BraceWrapping.AfterExternBlock: true
+# extern "C"
+# {
+#     void foo();
+# }
+#————————————————————————————————————————————————————#
+# IndentExternBlock: AfterExternBlock
+# BraceWrapping.AfterExternBlock: false
+# extern "C" {
+# void foo();
+# }
+#————————————————————————————————————————————————————#
+# NoIndent:
+# extern "C" {
+# void foo();
+# }
+#————————————————————————————————————————————————————#
+# Indent
+# extern "C" {
+#   void foo();
+# }
+
+#—————————————————————————————————————67————————————————————————————————————————————————————#
+#缩进goto标签
+IndentGotoLabels: true
+# true:                                  false:
+# int f() {                      vs.     int f() {
+#   if (foo()) {                           if (foo()) {
+#   label1:                              label1:
+#     bar();                                 bar();
+#   }                                      }
+# label2:                                label2:
+#   return 1;                              return 1;
+# }                                      }
+
+#—————————————————————————————————————68————————————————————————————————————————————————————#
+#预处理指令的缩进样式
+IndentPPDirectives: None
+#————————————————————————————————————————————————————#
+# None
+# #if FOO
+# #if BAR
+# #include <foo>
+# #endif
+# #endif
+#————————————————————————————————————————————————————#
+# AfterHash
+# #if FOO
+# #  if BAR
+# #    include <foo>
+# #  endif
+# #endif
+#————————————————————————————————————————————————————#
+# BeforeHash
+# #if FOO
+#   #if BAR
+#     #include <foo>
+#   #endif
+# #endif
+
+#—————————————————————————————————————69————————————————————————————————————————————————————#
+#requires缩进
+IndentRequiresClause: true
+#————————————————————————————————————————————————————#
+# true:
+# template <typename It>
+#   requires Iterator<It>
+# void sort(It begin, It end) {
+#   //....
+# }
+#————————————————————————————————————————————————————#
+# false:
+# template <typename It>
+# requires Iterator<It>
+# void sort(It begin, It end) {
+#   //....
+# }
+
+#—————————————————————————————————————70—————————————————————————————s———————————————————————#
+#缩进列数
+IndentWidth: 4
+
+#—————————————————————————————————————71————————————————————————————————————————————————————#
+#是否缩进被包装在类型之后的函数定义或声明
+IndentWrappedFunctionNames: false
+# true:
+# LoooooooooooooooooooooooooooooooooooooooongReturnType
+#     LoooooooooooooooooooooooooooooooongFunctionDeclaration();
+
+# false:
+# LoooooooooooooooooooooooooooooooooooooooongReturnType
+# LoooooooooooooooooooooooooooooooongFunctionDeclaration();
+
+#—————————————————————————————————————72————————————————————————————————————————————————————#
+#在C++中的控制语句（if、else、for、do和while）后插入大括号，
+#除非控制语句在宏定义内，或者大括号会包含预处理器指令。
+InsertBraces: true
+
+# false:                                    true:
+
+# if (isa<FunctionDecl>(D))        vs.      if (isa<FunctionDecl>(D)) {
+#   handleFunctionDecl(D);                    handleFunctionDecl(D);
+# else if (isa<VarDecl>(D))                 } else if (isa<VarDecl>(D)) {
+#   handleVarDecl(D);                         handleVarDecl(D);
+# else                                      } else {
+#   return;                                   return;
+#                                           }
+
+# while (i--)                      vs.      while (i--) {
+#   for (auto *A : D.attrs())                 for (auto *A : D.attrs()) {
+#     handleAttr(A);                            handleAttr(A);
+#                                             }
+#                                           }
+
+# do                               vs.      do {
+#   --i;                                      --i;
+# while (i);                                } while (i);
+
+#—————————————————————————————————————73————————————————————————————————————————————————————#
+#文件末尾新增空行
+InsertNewlineAtEOF: true
+
+#—————————————————————————————————————74————————————————————————————————————————————————————#
+#如果设置为TCS_Wrapped，将在跨多行的容器文字（数组和对象）中插入尾随逗号,仅适用java
+InsertTrailingCommas: None
+
+#—————————————————————————————————————75————————————————————————————————————————————————————#
+#格式化整数文字分隔符
+IntegerLiteralSeparator:
+    Binary: 0
+    BinaryMinDigits: 0
+    Decimal: 0
+    DecimalMinDigits: 0
+    Hex: 0
+    HexMinDigits: 0
+
+#—————————————————————————————————————76————————————————————————————————————————————————————#
+#用于JavaScript字符串的JavaScriptQuoteStyle。
+JavaScriptQuotes: Leave
+
+#—————————————————————————————————————77————————————————————————————————————————————————————#
+#是否包装JavaScript导入/导出语句。
+JavaScriptWrapImports: true
+
+#—————————————————————————————————————78————————————————————————————————————————————————————#
+#已废弃
+KeepEmptyLinesAtTheStartOfBlocks: true
+
+#—————————————————————————————————————79————————————————————————————————————————————————————#
+#已废弃
+KeepEmptyLinesAtEOF: false
+
+#—————————————————————————————————————80————————————————————————————————————————————————————#
+#lambda体的缩进样式
+LambdaBodyIndentation: Signature
+#————————————————————————————————————————————————————#
+# Signature:
+# someMethod(
+#     [](SomeReallyLongLambdaSignatureArgument foo) {
+#       return;
+#     });
+#————————————————————————————————————————————————————#
+# OuterScope:
+# someMethod(
+#     [](SomeReallyLongLambdaSignatureArgument foo) {
+#   return;
+# });
+
+# someMethod(someOtherMethod(
+#     [](SomeReallyLongLambdaSignatureArgument foo) {
+#   return;
+# }));
+#—————————————————————————————————————81————————————————————————————————————————————————————#
+# 行尾结束符
+LineEnding: DeriveLF
+# LF：使用 \n.
+#————————————————————————————————————————————————————#
+# CRLF：使用 \r\n.
+#————————————————————————————————————————————————————#
+# DeriveLF ：使用\n ，除非输入有更多以\r\n结尾的行
+#————————————————————————————————————————————————————#
+# DeriveCRLF：使用\r\n，除非输入有更多以\r\n结尾的行
+
+#—————————————————————————————————————82————————————————————————————————————————————————————#
+#控制宏定义块的起始标记
+MacroBlockBegin: ""
+
+#—————————————————————————————————————83————————————————————————————————————————————————————#
+#控制宏定义块的结束标记
+MacroBlockEnd: ""
+
+#—————————————————————————————————————84————————————————————————————————————————————————————#
+#要保留的最大空行
+MaxEmptyLinesToKeep: 1
+# MaxEmptyLinesToKeep: 1         vs.     MaxEmptyLinesToKeep: 0
+# int f() {                              int f() {
+#   int = 1;                                 int i = 1;
+#                                            i = foo();
+#   i = foo();                               return i;
+#                                        }
+#   return i;
+# }
+
+#—————————————————————————————————————85————————————————————————————————————————————————————#
+#命名空间的缩进
+NamespaceIndentation: All
+#————————————————————————————————————————————————————#
+# None：
+# namespace out {
+# int i;
+# namespace in {
+# int i;
+# }
+# }
+#————————————————————————————————————————————————————#
+# Inner
+# namespace out {
+# int i;
+# namespace in {
+#   int i;
+# }
+# }
+#————————————————————————————————————————————————————#
+# All
+# namespace out {
+#   int i;
+#   namespace in {
+#     int i;
+#   }
+# }
+
+#—————————————————————————————————————86————————————————————————————————————————————————————#
+#objc相关
+ObjCBinPackProtocolList: Auto
+ObjCBlockIndentWidth: 2
+ObjCBreakBeforeNestedBlockParam: true
+ObjCSpaceAfterProperty: false
+ObjCSpaceBeforeProtocolList: true
+
+#—————————————————————————————————————87————————————————————————————————————————————————————#
+#构造函数初始化的样式
+PackConstructorInitializers: NextLine
+#————————————————————————————————————————————————————#
+# Never:
+# Constructor()
+#     : a(),
+#       b()
+# BinPack
+# Constructor()
+#     : aaaaaaaaaaaaaaaaaaaa(), bbbbbbbbbbbbbbbbbbbb(),
+#       cccccccccccccccccccc()
+#————————————————————————————————————————————————————#
+# CurrentLine:
+# Constructor() : a(), b()
+
+# Constructor()
+#     : aaaaaaaaaaaaaaaaaaaa(),
+#       bbbbbbbbbbbbbbbbbbbb(),
+#       ddddddddddddd()
+#————————————————————————————————————————————————————#
+# NextLine:
+# Constructor() : a(), b()
+
+# Constructor()
+#     : aaaaaaaaaaaaaaaaaaaa(), bbbbbbbbbbbbbbbbbbbb(), ddddddddddddd()
+
+# Constructor()
+#     : aaaaaaaaaaaaaaaaaaaa(),
+#       bbbbbbbbbbbbbbbbbbbb(),
+#       cccccccccccccccccccc()
+#————————————————————————————————————————————————————#
+# NextLineOnly:
+# Constructor()
+#     : a(), b()
+
+# Constructor()
+#     : aaaaaaaaaaaaaaaaaaaa(), bbbbbbbbbbbbbbbbbbbb(), ddddddddddddd()
+
+# Constructor()
+#     : aaaaaaaaaaaaaaaaaaaa(),
+#       bbbbbbbbbbbbbbbbbbbb(),
+#       cccccccccccccccccccc()
+
+#—————————————————————————————————————88————————————————————————————————————————————————————#
+#objc相关
+PenaltyBreakAssignment: 2
+PenaltyBreakBeforeFirstCallParameter: 19
+PenaltyBreakComment: 300
+PenaltyBreakFirstLessLess: 120
+PenaltyBreakOpenParenthesis: 0
+PenaltyBreakScopeResolution: 500
+PenaltyBreakString: 1000
+PenaltyBreakTemplateDeclaration: 10
+PenaltyExcessCharacter: 1000000
+PenaltyIndentedWhitespace: 0
+PenaltyReturnTypeOnItsOwnLine: 60
+
+#—————————————————————————————————————89————————————————————————————————————————————————————#
+#指针和引用对齐样式
+PointerAlignment: Left
+#————————————————————————————————————————————————————#
+# Left
+# int* a;
+#————————————————————————————————————————————————————#
+# Right
+# int *a;
+#————————————————————————————————————————————————————#
+# Middle
+# int * a;
+
+#—————————————————————————————————————90————————————————————————————————————————————————————#
+#用于预处理器语句缩进的列数。当设置为-1（默认值）时，IndentWidth也用于预处理器语句。
+PPIndentWidth: -1
+
+# PPIndentWidth: 1
+
+# #ifdef __linux__
+# # define FOO
+# #else
+# # define BAR
+# #endif
+
+#—————————————————————————————————————91————————————————————————————————————————————————————#
+#排列说明符和限定符的不同方法，使用leave以外的配置将可能会造成错误的代码格式
+QualifierAlignment: Leave
+
+#—————————————————————————————————————92————————————————————————————————————————————————————#
+#引用对齐样式（替代引用的指针对齐）。
+ReferenceAlignment: Pointer
+#————————————————————————————————————————————————————#
+#Pointer:
+#与PointerAlignment相同
+#————————————————————————————————————————————————————#
+# Left:
+# int& a;
+#————————————————————————————————————————————————————#
+# Right:
+# int &a;
+#————————————————————————————————————————————————————#
+# Middle:
+# int & a;
+
+#—————————————————————————————————————93————————————————————————————————————————————————————#
+#是否将注释截断
+ReflowComments: true
+#————————————————————————————————————————————————————#
+# false:
+# // veryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongComment with plenty of information
+# /* second veryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongComment with plenty of information */
+#————————————————————————————————————————————————————#
+# true:
+# // veryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongComment with plenty of
+# // information
+# /* second veryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongComment with plenty of
+#  * information */
+
+#—————————————————————————————————————94————————————————————————————————————————————————————#
+#根据LLVM编码风格，删除C++中控制语句（if、else、for和while）的可选大括号。
+RemoveBracesLLVM: false
+
+#—————————————————————————————————————95————————————————————————————————————————————————————#
+#删除多余的括号 Leave MultipleParentheses ReturnStatement
+RemoveParentheses: Leave
+
+#—————————————————————————————————————96————————————————————————————————————————————————————#
+#删除函数和构造函数/析构函数的右括号后的分号。
+RemoveSemicolon: false
+
+#—————————————————————————————————————97————————————————————————————————————————————————————#
+#requires 的位置
+RequiresClausePosition: OwnLine
+#————————————————————————————————————————————————————#
+# OwnLine:
+# template <typename T>
+#   requires C<T>
+# struct Foo {...
+
+# template <typename T>
+# void bar(T t)
+#   requires C<T>;
+
+# template <typename T>
+#   requires C<T>
+# void bar(T t) {...
+
+# template <typename T>
+# void baz(T t)
+#   requires C<T>
+# {...
+#————————————————————————————————————————————————————#
+# OwnLineWithBrace:
+# void bar(T t)
+#   requires C<T> {
+#   return;
+# }
+
+# void bar(T t)
+#   requires C<T> {}
+
+# template <typename T>
+#   requires C<T>
+# void baz(T t) {
+#   ...
+
+# WithPreceding
+# template <typename T> requires C<T>
+# struct Foo {...
+
+# template <typename T> requires C<T>
+# void bar(T t) {...
+
+# template <typename T>
+# void baz(T t) requires C<T>
+# {...
+
+# WithFollowing
+# template <typename T>
+# requires C<T> struct Foo {...
+
+# template <typename T>
+# requires C<T> void bar(T t) {...
+
+# template <typename T>
+# void baz(T t)
+# requires C<T> {...
+#————————————————————————————————————————————————————#
+# SingleLine:
+# // Fitting:
+# template <typename T> requires C<T> struct Foo {...
+
+# template <typename T> requires C<T> void bar(T t) {...
+
+# template <typename T> void bar(T t) requires C<T> {...
+
+# // Not fitting, one possible example:
+# template <typename LongName>
+# requires C<LongName>
+# struct Foo {...
+
+# template <typename LongName>
+# requires C<LongName>
+# void bar(LongName ln) {
+
+# template <typename LongName>
+# void bar(LongName ln)
+#     requires C<LongName> {
+
+#—————————————————————————————————————98————————————————————————————————————————————————————#
+#用于的缩进需要表达式体。
+RequiresExpressionIndentation: OuterScope
+# OuterScope
+# template <typename T>
+# concept C = requires(T t) {
+#   ...
+# }
+
+# Keyword
+# template <typename T>
+# concept C = requires(T t) {
+#               ...
+#             }
+
+#—————————————————————————————————————99————————————————————————————————————————————————————#
+#使用空行分隔定义块，包括类、结构、枚举和函数。
+SeparateDefinitionBlocks: Always
+#Never                  v.s.     Always
+#include <cstring>              #include <cstring>
+# struct Foo {
+#   int a, b, c;                  struct Foo {
+# };                                int a, b, c;
+# namespace Ns {                  };
+# class Bar {
+# public:                         namespace Ns {
+#   struct Foobar {               class Bar {
+#     int a;                      public:
+#     int b;                        struct Foobar {
+#   };                                int a;
+# private:                            int b;
+#   int t;                          };
+#   int method1() {
+#     // ...                      private:
+#   }                               int t;
+#   enum List {
+#     ITEM1,                        int method1() {
+#     ITEM2                           // ...
+#   };                              }
+#   template<typename T>
+#   int method2(T x) {              enum List {
+#     // ...                          ITEM1,
+#   }                                 ITEM2
+#   int i, j, k;                    };
+#   int method3(int par) {
+#     // ...                        template<typename T>
+#   }                               int method2(T x) {
+# };                                  // ...
+# class C {};                       }
+# }
+#                                   int i, j, k;
+
+#                                   int method3(int par) {
+#                                     // ...
+#                                   }
+#                                 };
+
+#                                 class C {};
+#                                 }
+#—————————————————————————————————————100————————————————————————————————————————————————————#
+
+#短名称空间所包含的最大展开行数。默认为1。
+ShortNamespaceLines: 1
+# ShortNamespaceLines: 1     vs.     ShortNamespaceLines: 0
+# namespace a {                      namespace a {
+#   int foo;                           int foo;
+# }                                  } // namespace a
+
+# ShortNamespaceLines: 1     vs.     ShortNamespaceLines: 0
+# namespace b {                      namespace b {
+#   int foo;                           int foo;
+#   int bar;                           int bar;
+# } // namespace b                   } // namespace b
+
+#—————————————————————————————————————101————————————————————————————————————————————————————#
+#不格式化宏定义体
+SkipMacroDefinitionBody: false
+
+#—————————————————————————————————————102————————————————————————————————————————————————————#
+#如何对引用的头文件排序
+SortIncludes: CaseSensitive
+#————————————————————————————————————————————————————#
+# Never:
+# #include "B/A.h"
+# #include "A/B.h"
+# #include "a/b.h"
+# #include "A/b.h"
+# #include "B/a.h"
+#————————————————————————————————————————————————————#
+# CaseSensitive:
+# #include "A/B.h"
+# #include "A/b.h"
+# #include "B/A.h"
+# #include "B/a.h"
+# #include "a/b.h"
+#————————————————————————————————————————————————————#
+# CaseInsensitive:
+# #include "A/B.h"
+# #include "A/b.h"
+# #include "a/b.h"
+# #include "B/A.h"
+# #include "B/a.h"
+
+#—————————————————————————————————————103————————————————————————————————————————————————————#
+#对 Java 导入进行排序时
+SortJavaStaticImport: Before
+
+#—————————————————————————————————————104————————————————————————————————————————————————————#
+#控制clang-format是否以及如何使用声明进行排序。
+SortUsingDeclarations: LexicographicNumeric
+#————————————————————————————————————————————————————#
+# Never
+# using std::chrono::duration_cast;
+# using std::move;
+# using boost::regex;
+# using boost::regex_constants::icase;
+# using std::string;
+#————————————————————————————————————————————————————#
+# Lexicographic
+# using boost::regex;
+# using boost::regex_constants::icase;
+# using std::chrono::duration_cast;
+# using std::move;
+# using std::string;
+#————————————————————————————————————————————————————#
+# LexicographicNumeric
+# using boost::regex;
+# using boost::regex_constants::icase;
+# using std::move;
+# using std::string;
+# using std::chrono::duration_cast;
+
+#—————————————————————————————————————105————————————————————————————————————————————————————#
+#是否在强制转换后加空格
+SpaceAfterCStyleCast: false
+# true:                                  false:
+# (int) i;                       vs.     (int)i;
+
+#—————————————————————————————————————106————————————————————————————————————————————————————#
+#是否在逻辑非运算符后加入空格
+SpaceAfterLogicalNot: false
+# true:                                  false:
+# ! someExpression();            vs.     !someExpression();
+
+#—————————————————————————————————————107————————————————————————————————————————————————————#
+#template 后是否加空格
+SpaceAfterTemplateKeyword: true
+
+#—————————————————————————————————————108————————————————————————————————————————————————————#
+#定义在哪些情况下在指针限定符之前或之后放置空格
+SpaceAroundPointerQualifiers: Default
+#————————————————————————————————————————————————————#
+# Default:
+# PointerAlignment: Left                 PointerAlignment: Right
+# void* const* x = NULL;         vs.     void *const *x = NULL;
+#————————————————————————————————————————————————————#
+# Before:
+# PointerAlignment: Left                 PointerAlignment: Right
+# void* const* x = NULL;         vs.     void * const *x = NULL;
+#————————————————————————————————————————————————————#
+# After:
+# PointerAlignment: Left                 PointerAlignment: Right
+# void* const * x = NULL;         vs.     void *const *x = NULL;
+#————————————————————————————————————————————————————#
+# Both:
+# PointerAlignment: Left                 PointerAlignment: Right
+# void* const * x = NULL;         vs.     void * const *x = NULL;
+
+#—————————————————————————————————————109————————————————————————————————————————————————————#
+#是否删除赋值运算符之前的空格
+SpaceBeforeAssignmentOperators: true
+# true:                                  false:
+# int a = 5;                     vs.     int a= 5;
+# a += 42;                               a+= 42;
+
+#—————————————————————————————————————110————————————————————————————————————————————————————#
+#是否删除case前的空格
+SpaceBeforeCaseColon: false
+# true:                                   false
+# switch (x) {                    vs.     switch (x) {
+#   case 1 : break;                         case 1: break;
+# }                                       }
+
+#—————————————————————————————————————111————————————————————————————————————————————————————#
+
+#是否在用于初始化对象的 C++11 大括号列表之前插入一个空格（在前面的标识符或类型之后）。
+SpaceBeforeCpp11BracedList: false
+# true:                                  false:
+# Foo foo { bar };               vs.     Foo foo{ bar };
+# Foo {};                                Foo{};
+# vector<int> { 1, 2, 3 };               vector<int>{ 1, 2, 3 };
+# new int[3] { 1, 2, 3 };                new int[3]{ 1, 2, 3 };
+
+#—————————————————————————————————————112————————————————————————————————————————————————————#
+#是否删除构造函数初始化冒号之前的空格
+SpaceBeforeCtorInitializerColon: true
+# true:                                  false:
+# Foo::Foo() : a(a) {}                   Foo::Foo(): a(a) {}
+
+#—————————————————————————————————————113————————————————————————————————————————————————————#
+#是否不删除继承冒号前的空格
+SpaceBeforeInheritanceColon: true
+
+# true:                                  false:
+# class Foo : Bar {}             vs.     class Foo: Bar {}
+
+#—————————————————————————————————————114————————————————————————————————————————————————————#
+#是否在json 的冒号前增加空格
+SpaceBeforeJsonColon: false
+# true:                                  false:
+# {                                      {
+#   "key" : "value"              vs.       "key": "value"
+# }                                      }
+
+#—————————————————————————————————————115————————————————————————————————————————————————————#
+#定义在哪些情况下在打开括号之前放置空格。
+SpaceBeforeParens: ControlStatements
+#————————————————————————————————————————————————————#
+# Never:
+
+# ControlStatements
+# void f() {
+#   if (true) {
+#     f();
+#   }
+# }
+#————————————————————————————————————————————————————#
+# ControlStatementsExceptControlMacros:
+# void f() {
+#   Q_FOREACH(...) {
+#     f();
+#   }
+# }
+#————————————————————————————————————————————————————#
+# NonEmptyParentheses:
+# void() {
+#   if (true) {
+#     f();
+#     g (x, y, z);
+#   }
+# }
+#————————————————————————————————————————————————————#
+# Always:
+# void f () {
+#   if (true) {
+#     f ();
+#   }
+# }
+#————————————————————————————————————————————————————#
+# Custom:在SpaceBeforeParensOptions设置
+
+#—————————————————————————————————————116————————————————————————————————————————————————————#
+#括号钱放置空格的具体设置：
+SpaceBeforeParensOptions:
+    AfterControlStatements: true
+    AfterForeachMacros: true
+    AfterFunctionDefinitionName: false
+    AfterFunctionDeclarationName: false
+    AfterIfMacros: true
+    AfterOverloadedOperator: false
+    AfterPlacementOperator: true
+    AfterRequiresInClause: false
+    AfterRequiresInExpression: false
+    BeforeNonEmptyParentheses: false
+
+#—————————————————————————————————————117————————————————————————————————————————————————————#
+#是否不删除 for循环冒汗之前的空格
+SpaceBeforeRangeBasedForLoopColon: true
+# true:                                  false:
+# for (auto v : values) {}       vs.     for(auto v: values) {}
+
+#—————————————————————————————————————118————————————————————————————————————————————————————#
+#是否在第一个[前添加空格
+SpaceBeforeSquareBrackets: false
+# true:                                  false:
+# int a [5];                    vs.      int a[5];
+# int a [5][5];                 vs.      int a[5][5];
+
+#—————————————————————————————————————119————————————————————————————————————————————————————#
+#是否在{}中添加空格
+SpaceInEmptyBlock: false
+# true:                                false:
+# void f() { }                   vs.   void f() {}
+# while (true) { }                     while (true) {}
+
+#—————————————————————————————————————120————————————————————————————————————————————————————#
+#尾随行注释（//-comments）前的空格数。
+SpacesBeforeTrailingComments: 1
+# SpacesBeforeTrailingComments: 3
+# void f() {
+#   if (true) {   // foo1
+#     f();        // bar
+#   }             // foo
+# }
+
+#—————————————————————————————————————121————————————————————————————————————————————————————#
+#用于模板参数列表的样式
+SpacesInAngles: Never
+#————————————————————————————————————————————————————#
+# Never:
+
+# static_cast<int>(arg);
+# std::function<void(int)> fct;
+#————————————————————————————————————————————————————#
+# Always:
+
+# static_cast< int >(arg);
+# std::function< void(int) > fct;
+
+#—————————————————————————————————————122————————————————————————————————————————————————————#
+#是否在容器文字中加入空格
+SpacesInContainerLiterals: true
+# true:                                  false:
+# var arr = [ 1, 2, 3 ];         vs.     var arr = [1, 2, 3];
+# f({a : 1, b : 2, c : 3});              f({a: 1, b: 2, c: 3});
+
+#—————————————————————————————————————123————————————————————————————————————————————————————#
+#行注释开头允许有多少空格。要禁用最大值，请将其设置为-1，此外，最大值优先于最小值。
+SpacesInLineCommentPrefix:
+    Minimum: 1
+    Maximum: -1
+
+#—————————————————————————————————————124————————————————————————————————————————————————————#
+#定义在哪些情况下将在后面（和前面）插入空格。
+SpacesInParens: Never
+
+#—————————————————————————————————————125————————————————————————————————————————————————————#
+#SpacesInParens的具体样式，SpacesInParens需要设置为custom
+SpacesInParensOptions:
+    InCStyleCasts: false
+    InConditionalStatements: false
+    InEmptyParentheses: false
+    Other: false
+
+#—————————————————————————————————————126————————————————————————————————————————————————————#
+#是否在[]的前后加入空格
+SpacesInSquareBrackets: false
+
+# true:                                  false:
+# int a[ 5 ];                    vs.     int a[5];
+# std::unique_ptr<int[]> foo() {} // Won't be affected
+
+#—————————————————————————————————————127————————————————————————————————————————————————————#
+#使用的C格式
+Standard: Latest
+# c++03:                                 latest:
+# vector<set<int> > x;           vs.     vector<set<int>> x;
+
+#—————————————————————————————————————128————————————————————————————————————————————————————#
+#在语句前面被忽略的宏，就像它们是属性一样。这样它们就不会被解析为标识符，例如 Qts 发出的标识符。
+StatementAttributeLikeMacros:
+    - Q_EMIT
+
+#—————————————————————————————————————129————————————————————————————————————————————————————#
+#应被解释为完整语句的宏向量。 典型的宏是表达式，需要加分号；有时情况并非如此，这使得 clang-format 能够意识到这种情况。
+StatementMacros:
+    - Q_UNUSED
+    - QT_REQUIRE_VERSION
+
+#—————————————————————————————————————130————————————————————————————————————————————————————#
+#制表符的宽度
+TabWidth: 4
+
+#—————————————————————————————————————131————————————————————————————————————————————————————#
+#在生成的文件中使用制表符的方法。
+UseTab: Never
+
+#—————————————————————————————————————132————————————————————————————————————————————————————#
+#对于Verilog，在模块实例化中将每个端口放在自己的行上。
+VerilogBreakBetweenInstancePorts: true
+
+#—————————————————————————————————————133————————————————————————————————————————————————————#
+#对空格敏感且不应被修改的宏向量。
+WhitespaceSensitiveMacros:
+    - BOOST_PP_STRINGIZE
+    - CF_SWIFT_NAME
+    - NS_SWIFT_NAME
+    - PP_STRINGIZE
+    - STRINGIZE

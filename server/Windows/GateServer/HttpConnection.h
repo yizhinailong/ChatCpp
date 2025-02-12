@@ -10,8 +10,9 @@ public:
 
 private:
     void CheckDeadline();
-    void WriteRespone();
+    void WriteResponse();
     void HandleRequest();
+    void PreParseGetParam();
 
     tcp::socket _socket;
     beast::flat_buffer _buffer{ 8192 };
@@ -20,4 +21,6 @@ private:
     net::steady_timer deadline_{
         _socket.get_executor(), std::chrono::seconds(60)
     };
+    std::string _get_url;
+    std::unordered_map<std::string, std::string> _get_params;
 };

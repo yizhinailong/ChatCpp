@@ -42,6 +42,7 @@ LogicSystem::LogicSystem() {
         root["email"] = src_root["email"];
         std::string jsonstr = root.toStyledString();
         beast::ostream(connection->_response.body()) << jsonstr;
+        return true;
     });
 }
 

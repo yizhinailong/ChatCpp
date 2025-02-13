@@ -2,8 +2,11 @@
 #define GLOBAL_H
 
 #include <QByteArray>
+#include <QDir>
+#include <QJsonObject>
 #include <QNetworkReply>
 #include <QRegularExpression>
+#include <QSettings>
 #include <QWidget>
 #include <functional>
 #include <iostream>
@@ -30,5 +33,7 @@ enum ErrorCodes {
     ERR_JSON = 1, /* Json parsing failed */
     ERR_NETWORK = 2,
 };
+
+extern QString gate_url_prefix;
 
 #endif // GLOBAL_H

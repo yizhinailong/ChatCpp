@@ -16,7 +16,7 @@ void HttpMgr::PostHttpReq(QUrl url, QJsonObject json, ReqId req_id, Modules mod)
 
     auto self = shared_from_this();
 
-    QNetworkReply* reply = _manager->post(request, data);
+    QNetworkReply* reply = _manager.post(request, data);
     QObject::connect(reply, &QNetworkReply::finished, [self, reply, req_id, mod]() {
         /* handing errors */
         if (reply->error() != QNetworkReply::NoError) {

@@ -25,6 +25,7 @@ SectionInfo& SectionInfo::operator=(const SectionInfo& src) {
     }
 
     this->_section_datas = src._section_datas;
+    return *this;
 }
 
 ConfigMgr::ConfigMgr() {
@@ -67,10 +68,16 @@ ConfigMgr& ConfigMgr::operator=(const ConfigMgr& src) {
     }
 
     _config_map = src._config_map;
+    return *this;
 }
 
 ConfigMgr::~ConfigMgr() {
     _config_map.clear();
+}
+
+ConfigMgr& ConfigMgr::Inst() {
+    static ConfigMgr cfg_mgr;
+    return cfg_mgr;
 }
 
 SectionInfo ConfigMgr::operator[](const std::string& key) {

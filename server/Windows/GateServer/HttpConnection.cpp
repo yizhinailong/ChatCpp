@@ -2,8 +2,8 @@
 
 #include "LogicSystem.h"
 
-HttpConnection::HttpConnection(tcp::socket socket)
-    : _socket(std::move(socket)) {
+HttpConnection::HttpConnection(boost::asio::io_context& ioc)
+    : _socket(ioc) {
 }
 
 void HttpConnection::Start() {
@@ -23,6 +23,10 @@ void HttpConnection::Start() {
             std::cout << "Exception is " << exp.what() << std::endl;
         }
     });
+}
+
+tcp::socket& HttpConnection::GetSocket() {
+    return _socket;
 }
 
 void HttpConnection::CheckDeadline() {

@@ -30,7 +30,7 @@ async function GetVarifyCode(call, callback) {
 function main() {
   var server = new grpc.Server();
   server.addService(message_proto.VarifyService.service, { GetVarifyCode: GetVarifyCode });
-  server.bindAsync("0.0.0.0:50051", grpc.ServerCredentials.createInsecure(), () => {
+  server.bindAsync("127.0.0.1:50051", grpc.ServerCredentials.createInsecure(), () => {
     console.log("grpc server started");
   });
 }

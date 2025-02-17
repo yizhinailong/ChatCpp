@@ -1297,12 +1297,19 @@ IncludeCategories:
       Priority: 1
       SortPriority: 0
       CaseSensitive: false
-    - Regex: '^(<|"(gtest|gmock|isl|json)/)'
+    # 匹配以.h结尾的尖括号头文件（如<vector.h>）
+    - Regex: '^<.*\.h>$'
       Priority: 2
       SortPriority: 0
       CaseSensitive: false
-    - Regex: ".*"
+    # 匹配不包含.h的尖括号头文件（如<vector>）及特定引号头文件
+    - Regex: '^(<[^>]*>$|"(gtest|gmock|isl|json)/)'
       Priority: 3
+      SortPriority: 0
+      CaseSensitive: false
+    # 处理剩余的其他头文件
+    - Regex: ".*"
+      Priority: 4
       SortPriority: 0
       CaseSensitive: false
 

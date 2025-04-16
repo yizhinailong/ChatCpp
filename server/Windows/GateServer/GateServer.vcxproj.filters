@@ -42,6 +42,9 @@
     <ClCompile Include="AsioIOServicePool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RedisMgr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CServer.h">
@@ -69,6 +72,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AsioIOServicePool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpConnection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RedisMgr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1267,7 +1267,7 @@ IfMacros:
     - KJ_IF_MAYBE
 
 #—————————————————————————————————————59————————————————————————————————————————————————————#
-IncludeBlocks: Regroup
+IncludeBlocks: Preserve
 #选项用于控制头文件包含块的格式化。
 #这个选项允许你指定一组头文件包含应该被分组在一起，并按照一定的顺序进行排列。
 #————————————————————————————————————————————————————#
@@ -1292,26 +1292,43 @@ IncludeBlocks: Regroup
 
 #—————————————————————————————————————60————————————————————————————————————————————————————#
 #于控制头文件包含的分类和排序。这个选项允许你定义一组规则，按照这些规则对头文件包含进行分组和排序
-IncludeCategories:
-    - Regex: '^"(llvm|llvm-c|clang|clang-c)/'
-      Priority: 1
-      SortPriority: 0
-      CaseSensitive: false
-    # 匹配以.h结尾的尖括号头文件（如<vector.h>）
-    - Regex: '^<.*\.h>$'
-      Priority: 2
-      SortPriority: 0
-      CaseSensitive: false
-    # 匹配不包含.h的尖括号头文件（如<vector>）及特定引号头文件
-    - Regex: '^(<[^>]*>$|"(gtest|gmock|isl|json)/)'
-      Priority: 3
-      SortPriority: 0
-      CaseSensitive: false
-    # 处理剩余的其他头文件
-    - Regex: ".*"
-      Priority: 4
-      SortPriority: 0
-      CaseSensitive: false
+# 头文件分类和排序规则
+# IncludeCategories:
+#     # 2. <> 包含的 .h 文件
+#     - Regex: '^<.*\.h>$'
+#       Priority: 2
+#       SortPriority: 0
+#       CaseSensitive: false
+
+#     # 3. <> 包含的 .hpp 文件
+#     - Regex: '^<.*\.hpp>$'
+#       Priority: 3
+#       SortPriority: 0
+#       CaseSensitive: false
+
+#     # 4. <> 包含的没有后缀的文件（如 <iostream>）
+#     - Regex: "^<[^>.]+>$"
+#       Priority: 4
+#       SortPriority: 0
+#       CaseSensitive: false
+
+#     # 5. "" 包含的 .h 文件（非主头文件）
+#     - Regex: '^"[^"]+\.h"'
+#       Priority: 5
+#       SortPriority: 0
+#       CaseSensitive: false
+
+#     # 6. "" 包含的 .hpp 文件（非主头文件，与上一组无空行）
+#     - Regex: '^"[^"]+\.hpp"'
+#       Priority: 5 # 与上一组优先级相同，避免空行分隔
+#       SortPriority: 0
+#       CaseSensitive: false
+
+#     # 7. 其他未分类头文件
+#     - Regex: ".*"
+#       Priority: 6
+#       SortPriority: 0
+#       CaseSensitive: false
 
 #—————————————————————————————————————61————————————————————————————————————————————————————#
 # IncludeIsMainRegex 选项用于控制哪些头文件包含应该被视为“主”头文件。

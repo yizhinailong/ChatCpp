@@ -10,7 +10,7 @@ Language: Cpp
 
 #—————————————————————————————————————2————————————————————————————————————————————————————#
 #BasedOnStyle: LLVM|Google|Chromium|Mozilla|WebKit|Microsoft|GNU
-# BasedOnStyle:  LLVM
+BasedOnStyle: Google
 
 #—————————————————————————————————————3————————————————————————————————————————————————————#
 # 访问说明符(public、private等)的偏移(缩进或者对齐)
@@ -43,7 +43,7 @@ AlignAfterOpenBracket: Align
 
 #—————————————————————————————————————5————————————————————————————————————————————————————#
 #对齐结构体数组，当数组的列数相等时，会对齐每行的文本。
-AlignArrayOfStructures: Left
+AlignArrayOfStructures: Right
 #————————————————————————————————————————————————————#
 # Left，左对齐列：
 # struct test demo[] =
@@ -66,55 +66,55 @@ AlignArrayOfStructures: Left
 #—————————————————————————————————————6————————————————————————————————————————————————————#
 #AlignConsecutiveAssignments 对齐连续赋值
 AlignConsecutiveAssignments:
-    #是否启用 true/false
-    Enabled: false
+  #是否启用 true/false
+  Enabled: false
 
-    #可以跨越空白行进行对齐
-    AcrossEmptyLines: true
-    #————————————————————————————————————————————————————#
-    # true:
-    # int a            = 1;
-    # int somelongname = 2;
-    # double c         = 3;
+  #可以跨越空白行进行对齐
+  AcrossEmptyLines: true
+  #————————————————————————————————————————————————————#
+  # true:
+  # int a            = 1;
+  # int somelongname = 2;
+  # double c         = 3;
 
-    # int d            = 3;
-    #————————————————————————————————————————————————————#
-    # false:
-    # int a            = 1;
-    # int somelongname = 2;
-    # double c         = 3;
+  # int d            = 3;
+  #————————————————————————————————————————————————————#
+  # false:
+  # int a            = 1;
+  # int somelongname = 2;
+  # double c         = 3;
 
-    # int d = 3;
+  # int d = 3;
 
-    #可以跨越注释行进行对齐
-    AcrossComments: true
-    #————————————————————————————————————————————————————#
-    # true:
-    # int d    = 3;
-    # /* A comment. */
-    # double e = 4;
-    #————————————————————————————————————————————————————#
-    # false:
-    # int d = 3;
-    # /* A comment. */
-    # double e = 4;
+  #可以跨越注释行进行对齐
+  AcrossComments: true
+  #————————————————————————————————————————————————————#
+  # true:
+  # int d    = 3;
+  # /* A comment. */
+  # double e = 4;
+  #————————————————————————————————————————————————————#
+  # false:
+  # int d = 3;
+  # /* A comment. */
+  # double e = 4;
 
-    #混合运算符与等号组合会对齐于
-    AlignCompound: true
-    #————————————————————————————————————————————————————#
-    # true:
-    # a   &= 2;
-    # bbb  = 2;
-    #————————————————————————————————————————————————————#
-    # false:
-    # a &= 2;
-    # bbb = 2;
+  #混合运算符与等号组合会对齐于
+  AlignCompound: true
+  #————————————————————————————————————————————————————#
+  # true:
+  # a   &= 2;
+  # bbb  = 2;
+  #————————————————————————————————————————————————————#
+  # false:
+  # a &= 2;
+  # bbb = 2;
 
-    #该属性未启用
-    AlignFunctionPointers: false
+  #该属性未启用
+  AlignFunctionPointers: false
 
-    #混合运算符填补对齐到所有左值的最右边边界。
-    PadOperators: true
+  #混合运算符填补对齐到所有左值的最右边边界。
+  PadOperators: true
 #————————————————————————————————————————————————————#
 # true:
 # a   >>= 2;
@@ -133,15 +133,15 @@ AlignConsecutiveAssignments:
 #—————————————————————————————————————7————————————————————————————————————————————————————#
 #位段对齐
 AlignConsecutiveBitFields:
-    Enabled: false
-    AcrossEmptyLines: true
-    AcrossComments: true
-    #该属性未启用
-    AlignCompound: false
-    #该属性未启用
-    AlignFunctionPointers: false
-    #该属性未启用
-    PadOperators: false
+  Enabled: false
+  AcrossEmptyLines: true
+  AcrossComments: true
+  #该属性未启用
+  AlignCompound: false
+  #该属性未启用
+  AlignFunctionPointers: false
+  #该属性未启用
+  PadOperators: false
 #效果：
 # struct aa {
 #   int test : 4;
@@ -153,15 +153,15 @@ AlignConsecutiveBitFields:
 #—————————————————————————————————————8————————————————————————————————————————————————————#
 #连续声明对齐
 AlignConsecutiveDeclarations:
-    Enabled: false
-    AcrossEmptyLines: false
-    AcrossComments: false
-    #该属性未启用
-    AlignCompound: false
-    #该属性未启用
-    AlignFunctionPointers: false
-    #该属性未启用
-    PadOperators: false
+  Enabled: false
+  AcrossEmptyLines: false
+  AcrossComments: false
+  #该属性未启用
+  AlignCompound: false
+  #该属性未启用
+  AlignFunctionPointers: false
+  #该属性未启用
+  PadOperators: false
 #效果：
 # int         aaaa = 12;
 # float       b    = 23;
@@ -175,15 +175,15 @@ AlignConsecutiveDeclarations:
 #—————————————————————————————————————9————————————————————————————————————————————————————#
 #连续宏定义对齐
 AlignConsecutiveMacros:
-    Enabled: true
-    AcrossEmptyLines: false
-    AcrossComments: true
-    #该属性未启用
-    AlignCompound: false
-    #该属性未启用
-    AlignFunctionPointers: false
-    #该属性未启用
-    PadOperators: false
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: true
+  #该属性未启用
+  AlignCompound: false
+  #该属性未启用
+  AlignFunctionPointers: false
+  #该属性未启用
+  PadOperators: false
 #效果：
 #define SHORT_NAME       42
 #define LONGER_NAME      0x007f
@@ -196,44 +196,44 @@ AlignConsecutiveMacros:
 #—————————————————————————————————————10————————————————————————————————————————————————————#
 #switch 语句中连续的简短 case格式化
 AlignConsecutiveShortCaseStatements:
-    Enabled: true
-    #————————————————————————————————————————————————————#
-    #true:
-    # switch (level) {
-    # case log::info:    return "info:";
-    # case log::warning: return "warning:";
-    # default:           return "";
-    # }
-    #————————————————————————————————————————————————————#
-    # false:
-    # switch (level) {
-    # case log::info: return "info:";
-    # case log::warning: return "warning:";
-    # default: return "";
-    # }
+  Enabled: true
+  #————————————————————————————————————————————————————#
+  #true:
+  # switch (level) {
+  # case log::info:    return "info:";
+  # case log::warning: return "warning:";
+  # default:           return "";
+  # }
+  #————————————————————————————————————————————————————#
+  # false:
+  # switch (level) {
+  # case log::info: return "info:";
+  # case log::warning: return "warning:";
+  # default: return "";
+  # }
 
-    AcrossEmptyLines: true
-    #————————————————————————————————————————————————————#
-    # true:
-    # switch (level) {
-    # case log::info:    return "info:";
-    # case log::warning: return "warning:";
+  AcrossEmptyLines: true
+  #————————————————————————————————————————————————————#
+  # true:
+  # switch (level) {
+  # case log::info:    return "info:";
+  # case log::warning: return "warning:";
 
-    # default:           return "";
-    # }
-    #————————————————————————————————————————————————————#
-    # false:
-    # switch (level) {
-    # case log::info:    return "info:";
-    # case log::warning: return "warning:";
+  # default:           return "";
+  # }
+  #————————————————————————————————————————————————————#
+  # false:
+  # switch (level) {
+  # case log::info:    return "info:";
+  # case log::warning: return "warning:";
 
-    # default: return "";
-    # }
+  # default: return "";
+  # }
 
-    AcrossComments: true
+  AcrossComments: true
 
-    #冒号对齐
-    AlignCaseColons: true
+  #冒号对齐
+  AlignCaseColons: true
 #————————————————————————————————————————————————————#
 # true:
 # switch (level) {
@@ -274,7 +274,7 @@ AlignEscapedNewlines: DontAlign
 #—————————————————————————————————————12————————————————————————————————————————————————————#
 
 #竖直对齐表达式的操作数 DontAlign，Align，AlignAfterOperator
-AlignOperands: Align
+AlignOperands: AlignAfterOperator
 #————————————————————————————————————————————————————#
 # Align:
 # int aaa = bbbbbbbbbbbbbbb +
@@ -287,9 +287,9 @@ AlignOperands: Align
 #—————————————————————————————————————13————————————————————————————————————————————————————#
 #注释对齐 Leave Always Never
 AlignTrailingComments:
-    Kind: Always
-    #跨越的空行数对齐 (当是1的时候，中间有1个空行，注释依然对齐)
-    OverEmptyLines: 1
+  Kind: Always
+  #跨越的空行数对齐 (当是1的时候，中间有1个空行，注释依然对齐)
+  OverEmptyLines: 1
 #————————————————————————————————————————————————————#
 # Leave:
 # int a;    // comment
@@ -313,7 +313,7 @@ AlignTrailingComments:
 # int abcd; // comment
 #—————————————————————————————————————14————————————————————————————————————————————————————#
 #允许所有的参数放在下一行
-AllowAllArgumentsOnNextLine: true
+AllowAllArgumentsOnNextLine: false
 #————————————————————————————————————————————————————#
 # true:
 # callFunction(
@@ -327,7 +327,7 @@ AllowAllArgumentsOnNextLine: true
 
 #—————————————————————————————————————15————————————————————————————————————————————————————#
 #允许所有的声明放在下一行
-AllowAllParametersOfDeclarationOnNextLine: true
+AllowAllParametersOfDeclarationOnNextLine: false
 #————————————————————————————————————————————————————#
 # true:
 # void myFunction(
@@ -434,7 +434,7 @@ AllowShortEnumsOnASingleLine: true
 
 #—————————————————————————————————————21————————————————————————————————————————————————————#
 #允许将短的函数放在一行上 None InlineOnly Empty Inline All
-AllowShortFunctionsOnASingleLine: Empty
+AllowShortFunctionsOnASingleLine: Inline
 #————————————————————————————————————————————————————#
 # InlineOnly:
 # class Foo {
@@ -527,7 +527,7 @@ AllowShortIfStatementsOnASingleLine: AllIfsAndElse
 
 #—————————————————————————————————————23————————————————————————————————————————————————————#
 #允许将短的lambda语句放在同一行 None  Empty Inline All
-AllowShortLambdasOnASingleLine: All
+AllowShortLambdasOnASingleLine: Inline
 #————————————————————————————————————————————————————#
 # Empty:
 # auto lambda = [](int a) {};
@@ -576,11 +576,11 @@ AlwaysBreakTemplateDeclarations: MultiLine
 # __capability, __output, __unused
 
 AttributeMacros:
-    - __capability
+  - __capability
 
 #—————————————————————————————————————29————————————————————————————————————————————————————#
-#如果为false，在函数中的参数要么全在一行要么全在不同行
-BinPackArguments: true
+#如果为false，在函数中的参数要么全在一行要么全在不同行 不能使用
+BinPackArguments: false
 #————————————————————————————————————————————————————#
 # true:
 # void f() {
@@ -619,225 +619,225 @@ BitFieldColonSpacing: Both
 #花括号 {} 位置
 #若 BreakBeforeBraces 选项被设置为 Custom，则使用下列选项来确定花括号位置，否则忽略
 BraceWrapping:
-    #case 语句的花括号
-    AfterCaseLabel: false
-    #   false:                                true:
-    # switch (foo) {                vs.     switch (foo) {
-    #   case 1: {                             case 1:
-    #     bar();                              {
-    #     break;                                bar();
-    #   }                                       break;
-    #   default: {                            }
-    #     plop();                             default:
-    #   }                                     {
-    # }                                         plop();
-    #                                         }
-    #                                       }
+  #case 语句的花括号
+  AfterCaseLabel: false
+  #   false:                                true:
+  # switch (foo) {                vs.     switch (foo) {
+  #   case 1: {                             case 1:
+  #     bar();                              {
+  #     break;                                bar();
+  #   }                                       break;
+  #   default: {                            }
+  #     plop();                             default:
+  #   }                                     {
+  # }                                         plop();
+  #                                         }
+  #                                       }
 
-    #类后的花括号
-    AfterClass: false
-    #————————————————————————————————————————————————————#
-    # true:
-    # class foo
-    # {};
-    #————————————————————————————————————————————————————#
-    # false:
-    # class foo {};
+  #类后的花括号
+  AfterClass: false
+  #————————————————————————————————————————————————————#
+  # true:
+  # class foo
+  # {};
+  #————————————————————————————————————————————————————#
+  # false:
+  # class foo {};
 
-    #控制语句的花括号
-    AfterControlStatement: Never
-    #————————————————————————————————————————————————————#
-    # Never：
-    # if (foo()) {
-    # } else {
-    # }
-    # for (int i = 0; i < 10; ++i) {
-    # }
-    #————————————————————————————————————————————————————#
-    # MultiLine
-    # if (foo && bar &&
-    #     baz)
-    # {
-    #   quux();
-    # }
-    # while (foo || bar) {
-    # }
-    #————————————————————————————————————————————————————#
-    # Always
-    # if (foo())
-    # {
-    # } else
-    # {}
-    # for (int i = 0; i < 10; ++i)
-    # {}
+  #控制语句的花括号
+  AfterControlStatement: Never
+  #————————————————————————————————————————————————————#
+  # Never：
+  # if (foo()) {
+  # } else {
+  # }
+  # for (int i = 0; i < 10; ++i) {
+  # }
+  #————————————————————————————————————————————————————#
+  # MultiLine
+  # if (foo && bar &&
+  #     baz)
+  # {
+  #   quux();
+  # }
+  # while (foo || bar) {
+  # }
+  #————————————————————————————————————————————————————#
+  # Always
+  # if (foo())
+  # {
+  # } else
+  # {}
+  # for (int i = 0; i < 10; ++i)
+  # {}
 
-    #枚举后的花括号
-    AfterEnum: false
-    #————————————————————————————————————————————————————#
-    #   true:
-    # enum X : int
-    # {
-    #   B
-    # };
-    #————————————————————————————————————————————————————#
-    # false:
-    # enum X : int { B };
+  #枚举后的花括号
+  AfterEnum: false
+  #————————————————————————————————————————————————————#
+  #   true:
+  # enum X : int
+  # {
+  #   B
+  # };
+  #————————————————————————————————————————————————————#
+  # false:
+  # enum X : int { B };
 
-    #extern 后的花括号
-    AfterExternBlock: false
-    #————————————————————————————————————————————————————#
-    # true:
-    # extern "C"
-    # {
-    #   int foo();
-    # }
-    #————————————————————————————————————————————————————#
-    # false:
-    # extern "C" {
-    # int foo();
-    # }
+  #extern 后的花括号
+  AfterExternBlock: false
+  #————————————————————————————————————————————————————#
+  # true:
+  # extern "C"
+  # {
+  #   int foo();
+  # }
+  #————————————————————————————————————————————————————#
+  # false:
+  # extern "C" {
+  # int foo();
+  # }
 
-    #函数后的花括号
-    AfterFunction: false
-    #————————————————————————————————————————————————————#
-    # true:
-    # void foo()
-    # {
-    #   bar();
-    #   bar2();
-    # }
-    #————————————————————————————————————————————————————#
-    # false:
-    # void foo() {
-    #   bar();
-    #   bar2();
-    # }
+  #函数后的花括号
+  AfterFunction: false
+  #————————————————————————————————————————————————————#
+  # true:
+  # void foo()
+  # {
+  #   bar();
+  #   bar2();
+  # }
+  #————————————————————————————————————————————————————#
+  # false:
+  # void foo() {
+  #   bar();
+  #   bar2();
+  # }
 
-    #命名空间后的花括号
-    AfterNamespace: false
-    #————————————————————————————————————————————————————#
-    # true:
-    # namespace
-    # {
-    # int foo();
-    # int bar();
-    # }
-    #————————————————————————————————————————————————————#
-    # false:
-    # namespace {
-    # int foo();
-    # int bar();
-    # }
+  #命名空间后的花括号
+  AfterNamespace: false
+  #————————————————————————————————————————————————————#
+  # true:
+  # namespace
+  # {
+  # int foo();
+  # int bar();
+  # }
+  #————————————————————————————————————————————————————#
+  # false:
+  # namespace {
+  # int foo();
+  # int bar();
+  # }
 
-    #ObjC 的花括号
-    AfterObjCDeclaration: false
+  #ObjC 的花括号
+  AfterObjCDeclaration: false
 
-    #结构体花括号
-    AfterStruct: false
-    #————————————————————————————————————————————————————#
-    # true:
-    # struct foo
-    # {
-    #   int x;
-    # };
-    #————————————————————————————————————————————————————#
-    # false:
-    # struct foo {
-    #   int x;
-    # };
+  #结构体花括号
+  AfterStruct: false
+  #————————————————————————————————————————————————————#
+  # true:
+  # struct foo
+  # {
+  #   int x;
+  # };
+  #————————————————————————————————————————————————————#
+  # false:
+  # struct foo {
+  #   int x;
+  # };
 
-    #联合体的花括号
-    AfterUnion: false
-    #————————————————————————————————————————————————————#
-    # true:
-    # union foo
-    # {
-    #   int x;
-    # }
-    #————————————————————————————————————————————————————#
-    # false:
-    # union foo {
-    #   int x;
-    # }
+  #联合体的花括号
+  AfterUnion: false
+  #————————————————————————————————————————————————————#
+  # true:
+  # union foo
+  # {
+  #   int x;
+  # }
+  #————————————————————————————————————————————————————#
+  # false:
+  # union foo {
+  #   int x;
+  # }
 
-    #catch 前的花括号
-    BeforeCatch: false
-    #————————————————————————————————————————————————————#
-    # true:
-    # try {
-    #   foo();
-    # }
-    # catch () {
-    # }
-    #————————————————————————————————————————————————————#
-    # false:
-    # try {
-    #   foo();
-    # } catch () {
+  #catch 前的花括号
+  BeforeCatch: false
+  #————————————————————————————————————————————————————#
+  # true:
+  # try {
+  #   foo();
+  # }
+  # catch () {
+  # }
+  #————————————————————————————————————————————————————#
+  # false:
+  # try {
+  #   foo();
+  # } catch () {
 
-    #else前的花括号
-    BeforeElse: false
-    #————————————————————————————————————————————————————#
-    # true:
-    # if (foo()) {
-    # }
-    # else {
-    # }
-    #————————————————————————————————————————————————————#
-    # false:
-    # if (foo()) {
-    # } else {
-    # }
+  #else前的花括号
+  BeforeElse: false
+  #————————————————————————————————————————————————————#
+  # true:
+  # if (foo()) {
+  # }
+  # else {
+  # }
+  #————————————————————————————————————————————————————#
+  # false:
+  # if (foo()) {
+  # } else {
+  # }
 
-    #lambda前的花括号
-    BeforeLambdaBody: false
-    #————————————————————————————————————————————————————#
-    # true:
-    # connect(
-    #   []()
-    #   {
-    #     foo();
-    #     bar();
-    #   });
-    #————————————————————————————————————————————————————#
-    # false:
-    # connect([]() {
-    #   foo();
-    #   bar();
-    # });
+  #lambda前的花括号
+  BeforeLambdaBody: false
+  #————————————————————————————————————————————————————#
+  # true:
+  # connect(
+  #   []()
+  #   {
+  #     foo();
+  #     bar();
+  #   });
+  #————————————————————————————————————————————————————#
+  # false:
+  # connect([]() {
+  #   foo();
+  #   bar();
+  # });
 
-    #while前的花括号
-    BeforeWhile: false
-    #————————————————————————————————————————————————————#
-    # true:
-    # do {
-    #   foo();
-    # }
-    # while (1);
-    #————————————————————————————————————————————————————#
-    # false:
-    # do {
-    #   foo();
-    # } while (1);
+  #while前的花括号
+  BeforeWhile: false
+  #————————————————————————————————————————————————————#
+  # true:
+  # do {
+  #   foo();
+  # }
+  # while (1);
+  #————————————————————————————————————————————————————#
+  # false:
+  # do {
+  #   foo();
+  # } while (1);
 
-    #花括号缩进
-    IndentBraces: false
-    #分割空函数
-    SplitEmptyFunction: false
-    # false:          true:
-    # int f()   vs.   int f()
-    # {}              {
-    #                 }
+  #花括号缩进
+  IndentBraces: false
+  #分割空函数
+  SplitEmptyFunction: false
+  # false:          true:
+  # int f()   vs.   int f()
+  # {}              {
+  #                 }
 
-    #分割空class
-    SplitEmptyRecord: false
-    # false:           true:
-    # class Foo   vs.  class Foo
-    # {}               {
-    #                  }
+  #分割空class
+  SplitEmptyRecord: false
+  # false:           true:
+  # class Foo   vs.  class Foo
+  # {}               {
+  #                  }
 
-    #分割空命名空间
-    SplitEmptyNamespace: false
+  #分割空命名空间
+  SplitEmptyNamespace: false
 # false:               true:
 # namespace Foo   vs.  namespace Foo
 # {}                   {
@@ -1256,18 +1256,18 @@ FixNamespaceComments: true
 #用于控制宏展开时的格式化，特别是与 foreach 宏类似的迭代宏。
 #这个选项允许你指定哪些宏应该被视为迭代宏，并按照迭代宏的格式化规则进行处理。
 ForEachMacros:
-    - foreach
-    - Q_FOREACH
-    - BOOST_FOREACH
+  - foreach
+  - Q_FOREACH
+  - BOOST_FOREACH
 
 #—————————————————————————————————————58————————————————————————————————————————————————————#
 #选项用于控制预处理器条件编译指令的格式化。当你在 IfMacros 下列出特定的宏时，.clang-format
 #会将这些宏视为条件编译指令，并按照条件编译指令的格式化规则来处理它们。
 IfMacros:
-    - KJ_IF_MAYBE
+  - KJ_IF_MAYBE
 
 #—————————————————————————————————————59————————————————————————————————————————————————————#
-IncludeBlocks: Preserve
+IncludeBlocks: Regroup
 #选项用于控制头文件包含块的格式化。
 #这个选项允许你指定一组头文件包含应该被分组在一起，并按照一定的顺序进行排列。
 #————————————————————————————————————————————————————#
@@ -1293,48 +1293,44 @@ IncludeBlocks: Preserve
 #—————————————————————————————————————60————————————————————————————————————————————————————#
 #于控制头文件包含的分类和排序。这个选项允许你定义一组规则，按照这些规则对头文件包含进行分组和排序
 # 头文件分类和排序规则
-# IncludeCategories:
-#     # 2. <> 包含的 .h 文件
-#     - Regex: '^<.*\.h>$'
-#       Priority: 2
-#       SortPriority: 0
-#       CaseSensitive: false
+IncludeCategories:
+  # 根据你的项目名调整 "myproject"
+  - Regex: '^"(myproject/.+\.h)"'
+    Priority: 0
 
-#     # 3. <> 包含的 .hpp 文件
-#     - Regex: '^<.*\.hpp>$'
-#       Priority: 3
-#       SortPriority: 0
-#       CaseSensitive: false
+  # # 1. C系统头文件 (.h> 结尾)
+  # - Regex: '^<.*\.h>$'
+  #   Priority: 1
 
-#     # 4. <> 包含的没有后缀的文件（如 <iostream>）
-#     - Regex: "^<[^>.]+>$"
-#       Priority: 4
-#       SortPriority: 0
-#       CaseSensitive: false
+  # 2. C++系统头文件 (无扩展名，以 > 结尾)
+  - Regex: "^<[^./]+>$"
+    Priority: 2
 
-#     # 5. "" 包含的 .h 文件（非主头文件）
-#     - Regex: '^"[^"]+\.h"'
-#       Priority: 5
-#       SortPriority: 0
-#       CaseSensitive: false
+  # 3. 第三方库头文件 (.h>结尾)
+  - Regex: '^<.*\.h>$'
+    Priority: 3
 
-#     # 6. "" 包含的 .hpp 文件（非主头文件，与上一组无空行）
-#     - Regex: '^"[^"]+\.hpp"'
-#       Priority: 5 # 与上一组优先级相同，避免空行分隔
-#       SortPriority: 0
-#       CaseSensitive: false
+  # 4. 第三方库头文件 (.hpp>结尾)
+  - Regex: '^<.*\.hpp>$'
+    Priority: 4
 
-#     # 7. 其他未分类头文件
-#     - Regex: ".*"
-#       Priority: 6
-#       SortPriority: 0
-#       CaseSensitive: false
+  # 5. 项目内头文件 (.h"结尾)
+  - Regex: '^".*\.h"$'
+    Priority: 5
+
+  # 6. 项目内头文件 (.hpp"结尾)
+  - Regex: '^".*\.hpp"$'
+    Priority: 6
+
+  # 7. 其他未分类的头文件（兜底规则）
+  - Regex: "^.*"
+    Priority: 7
 
 #—————————————————————————————————————61————————————————————————————————————————————————————#
 # IncludeIsMainRegex 选项用于控制哪些头文件包含应该被视为“主”头文件。
 # 这个选项允许你指定一个正则表达式，用于匹配那些被认为是“主”头文件的包含声明。
 # 当一个头文件被视为“主”头文件时，.clang-format 会在格式化时给予特别处理。
-IncludeIsMainRegex: "(Test)?$"
+IncludeIsMainRegex: "([-_](test|unittest))?$"
 
 #—————————————————————————————————————62————————————————————————————————————————————————————#
 #  IncludeIsMainSourceRegex 选项用于控制哪些源文件包含应该被视为“主”源文件。
@@ -1431,7 +1427,7 @@ IndentGotoLabels: true
 
 #—————————————————————————————————————68————————————————————————————————————————————————————#
 #预处理指令的缩进样式
-IndentPPDirectives: None
+IndentPPDirectives: BeforeHash
 #————————————————————————————————————————————————————#
 # None
 # #if FOO
@@ -1456,7 +1452,7 @@ IndentPPDirectives: None
 
 #—————————————————————————————————————69————————————————————————————————————————————————————#
 #requires缩进
-IndentRequiresClause: true
+IndentRequiresClause: false
 #————————————————————————————————————————————————————#
 # true:
 # template <typename It>
@@ -1523,12 +1519,12 @@ InsertTrailingCommas: None
 #—————————————————————————————————————75————————————————————————————————————————————————————#
 #格式化整数文字分隔符
 IntegerLiteralSeparator:
-    Binary: 0
-    BinaryMinDigits: 0
-    Decimal: 0
-    DecimalMinDigits: 0
-    Hex: 0
-    HexMinDigits: 0
+  Binary: 0
+  BinaryMinDigits: 0
+  Decimal: 0
+  DecimalMinDigits: 0
+  Hex: 0
+  HexMinDigits: 0
 
 #—————————————————————————————————————76————————————————————————————————————————————————————#
 #用于JavaScript字符串的JavaScriptQuoteStyle。
@@ -2095,16 +2091,16 @@ SpaceBeforeParens: ControlStatements
 #—————————————————————————————————————116————————————————————————————————————————————————————#
 #括号钱放置空格的具体设置：
 SpaceBeforeParensOptions:
-    AfterControlStatements: true
-    AfterForeachMacros: true
-    AfterFunctionDefinitionName: false
-    AfterFunctionDeclarationName: false
-    AfterIfMacros: true
-    AfterOverloadedOperator: false
-    AfterPlacementOperator: true
-    AfterRequiresInClause: false
-    AfterRequiresInExpression: false
-    BeforeNonEmptyParentheses: false
+  AfterControlStatements: true
+  AfterForeachMacros: true
+  AfterFunctionDefinitionName: false
+  AfterFunctionDeclarationName: false
+  AfterIfMacros: true
+  AfterOverloadedOperator: false
+  AfterPlacementOperator: true
+  AfterRequiresInClause: false
+  AfterRequiresInExpression: false
+  BeforeNonEmptyParentheses: false
 
 #—————————————————————————————————————117————————————————————————————————————————————————————#
 #是否不删除 for循环冒汗之前的空格
@@ -2160,8 +2156,8 @@ SpacesInContainerLiterals: true
 #—————————————————————————————————————123————————————————————————————————————————————————————#
 #行注释开头允许有多少空格。要禁用最大值，请将其设置为-1，此外，最大值优先于最小值。
 SpacesInLineCommentPrefix:
-    Minimum: 1
-    Maximum: -1
+  Minimum: 1
+  Maximum: -1
 
 #—————————————————————————————————————124————————————————————————————————————————————————————#
 #定义在哪些情况下将在后面（和前面）插入空格。
@@ -2170,10 +2166,10 @@ SpacesInParens: Never
 #—————————————————————————————————————125————————————————————————————————————————————————————#
 #SpacesInParens的具体样式，SpacesInParens需要设置为custom
 SpacesInParensOptions:
-    InCStyleCasts: false
-    InConditionalStatements: false
-    InEmptyParentheses: false
-    Other: false
+  InCStyleCasts: false
+  InConditionalStatements: false
+  InEmptyParentheses: false
+  Other: false
 
 #—————————————————————————————————————126————————————————————————————————————————————————————#
 #是否在[]的前后加入空格
@@ -2192,13 +2188,13 @@ Standard: Latest
 #—————————————————————————————————————128————————————————————————————————————————————————————#
 #在语句前面被忽略的宏，就像它们是属性一样。这样它们就不会被解析为标识符，例如 Qts 发出的标识符。
 StatementAttributeLikeMacros:
-    - Q_EMIT
+  - Q_EMIT
 
 #—————————————————————————————————————129————————————————————————————————————————————————————#
 #应被解释为完整语句的宏向量。 典型的宏是表达式，需要加分号；有时情况并非如此，这使得 clang-format 能够意识到这种情况。
 StatementMacros:
-    - Q_UNUSED
-    - QT_REQUIRE_VERSION
+  - Q_UNUSED
+  - QT_REQUIRE_VERSION
 
 #—————————————————————————————————————130————————————————————————————————————————————————————#
 #制表符的宽度
@@ -2215,8 +2211,8 @@ VerilogBreakBetweenInstancePorts: true
 #—————————————————————————————————————133————————————————————————————————————————————————————#
 #对空格敏感且不应被修改的宏向量。
 WhitespaceSensitiveMacros:
-    - BOOST_PP_STRINGIZE
-    - CF_SWIFT_NAME
-    - NS_SWIFT_NAME
-    - PP_STRINGIZE
-    - STRINGIZE
+  - BOOST_PP_STRINGIZE
+  - CF_SWIFT_NAME
+  - NS_SWIFT_NAME
+  - PP_STRINGIZE
+  - STRINGIZE

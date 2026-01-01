@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="GateServer.vcxproj" Id="683c551d-a297-45a3-a7fc-89f01f78c23a" />
+</Solution>

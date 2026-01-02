@@ -1,5 +1,8 @@
 #include "registerdialog.hpp"
 
+#include <QJsonObject>
+#include <QUrl>
+
 #include "ui_registerdialog.h"
 
 #include "global.hpp"
@@ -31,8 +34,14 @@ void RegisterDialog::on_verify_button_clicked() {
     QRegularExpression regex(R"(^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$)");
     bool match = regex.match(email).hasMatch();
     if (match) {
-        ShowTip(tr("邮箱地址正确"), true);
-        // TODO 发送验证码
+        QJsonObject json_obj;
+        json_obj["email"] = email;
+        HttpMgr::GetInstance()->PostHttpRequest(
+            QUrl(gate_url_prefix + "/get_verify_code"),
+            json_obj,
+            RequestId::ID_GET_VERIFY_CODE,
+            Modules::REGISTER_MODULE);
+
     } else {
         ShowTip(tr("邮箱地址不正确"), false);
     }

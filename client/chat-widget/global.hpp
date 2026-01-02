@@ -10,6 +10,8 @@
  */
 extern std::function<void(QWidget*)> repolish;
 
+extern QString gate_url_prefix;
+
 enum class RequestId {
     ID_GET_VERIFY_CODE,
     ID_REGISTER_USER,

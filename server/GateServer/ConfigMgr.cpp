@@ -51,15 +51,6 @@ ConfigMgr::ConfigMgr() {
         section_info.m_section_datas = section_config;
         m_config_map[section_name] = section_info;
     }
-
-    for (const auto& config_pair : m_config_map) {
-        const std::string& section = config_pair.first;
-        const SectionInfo& section_info = config_pair.second;
-        std::cout << "Section [" << section << "]:" << std::endl;
-        for (const auto& key_value_pair : section_info.m_section_datas) {
-            std::cout << "  " << key_value_pair.first << " = " << key_value_pair.second << std::endl;
-        }
-    }
 }
 
 ConfigMgr::~ConfigMgr() {

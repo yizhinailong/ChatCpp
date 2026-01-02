@@ -137,6 +137,7 @@
     <ClInclude Include="CServer.hpp" />
     <ClInclude Include="HttpConnection.hpp" />
     <ClInclude Include="LoginSystem.hpp" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Singleton.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

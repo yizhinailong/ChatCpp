@@ -12,7 +12,9 @@ public:
     ~LoginSystem();
 
     bool HandleGet(std::string path, std::shared_ptr<HttpConnection> conneciton);
+    bool HandlePost(std::string path, std::shared_ptr<HttpConnection> connection);
     void RegisterGetHandler(std::string url, HttpHandler handler);
+    void RegisterPostHandler(std::string url, HttpHandler handler);
 
 private:
     LoginSystem();

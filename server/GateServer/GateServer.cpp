@@ -13,8 +13,8 @@ int main() {
 
                 ioc.stop();
             });
-
         std::make_shared<CServer>(ioc, port)->Start();
+        std::cout << "GateServer started at http://127.0.0.1:" << port << std::endl;
         ioc.run();
     } catch (const std::exception& exp) {
         std::cerr << "GateServer exception is " << exp.what() << std::endl;

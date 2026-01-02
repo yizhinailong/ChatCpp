@@ -25,6 +25,8 @@ void CServer::Start() {
                 // 继续监听
                 self->Start();
             } catch (const std::exception& exp) {
+                std::cerr << "CServer accept exception is " << exp.what() << std::endl;
+                return;
             }
         });
 }

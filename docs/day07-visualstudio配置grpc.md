@@ -141,20 +141,20 @@ re2.lib
 ## proto文件编写
 
 在项目的根目录下创建一个proto名字为message.proto
-``` bash
+``` protobuf
 syntax = "proto3";
 
 package message;
 
-service VarifyService {
-  rpc GetVarifyCode (GetVarifyReq) returns (GetVarifyRsp) {}
+service VerifyService {
+  rpc GetVerifyCode (GetVerifyRequest) returns (GetVerifyResponse) {}
 }
 
-message GetVarifyReq {
+message GetVerifyRequest {
   string email = 1;
 }
 
-message GetVarifyRsp {
+message GetVerifyResponse {
   int32 error = 1;
   string email = 2;
   string code = 3;

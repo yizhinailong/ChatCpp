@@ -1,6 +1,7 @@
 #include "LoginSystem.hpp"
 
 #include "HttpConnection.hpp"
+#include "VerifyGrpcClient.hpp"
 
 LoginSystem::~LoginSystem() {
 }
@@ -48,8 +49,9 @@ LoginSystem::LoginSystem() {
             }
 
             auto email = src_root["email"].asString();
+            GetVerifyResponse verify_response = VerifyGrpcClient::GetInstance()->GetVerifyCode(email);
             std::cout << "Email is " << email << std::endl;
-            root["error"] = static_cast<std::uint16_t>(ErrorCode::SUCCESS);
+            root["error"] = verify_response.error();
             root["email"] = src_root["email"];
             std::string json_str = root.toStyledString();
             beast::ostream(connection->m_response.body()) << json_str;

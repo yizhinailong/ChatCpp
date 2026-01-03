@@ -2,8 +2,8 @@
 
 #include "LoginSystem.hpp"
 
-HttpConnection::HttpConnection(tcp::socket socket)
-    : m_socket(std::move(socket)) {}
+HttpConnection::HttpConnection(boost::asio::io_context& ioc)
+    : m_socket(ioc) {}
 
 void HttpConnection::Start() {
     auto self = shared_from_this();
@@ -25,6 +25,10 @@ void HttpConnection::Start() {
                 std::cout << "Http exception is " << exp.what() << std::endl;
             }
         });
+}
+
+tcp::socket& HttpConnection::GetSocket() {
+    return m_socket;
 }
 
 void HttpConnection::CheckDeadline() {

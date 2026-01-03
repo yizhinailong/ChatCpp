@@ -26,6 +26,3 @@ enum class ErrorCode : std::uint16_t {
     ERROR_JSON,
     RPCFAILED,
 };
-
-class ConfigMgr;
-extern ConfigMgr g_cfg;

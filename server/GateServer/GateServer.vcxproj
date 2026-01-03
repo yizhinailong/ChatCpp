@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AsioIOServeicePool.cpp" />
     <ClCompile Include="ConfigMgr.cpp" />
     <ClCompile Include="CServer.cpp" />
     <ClCompile Include="GateServer.cpp" />
@@ -137,6 +138,7 @@
     <ClCompile Include="VerifyGrpcClient.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AsioIOServeicePool.hpp" />
     <ClInclude Include="ConfigMgr.hpp" />
     <ClInclude Include="Const.hpp" />
     <ClInclude Include="CServer.hpp" />

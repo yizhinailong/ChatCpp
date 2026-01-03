@@ -3,7 +3,7 @@
 
 int main() {
     try {
-        ConfigMgr g_cfg;
+        auto& g_cfg = ConfigMgr::GetInstance();
         std::string gate_port_str = g_cfg["GateServer"]["Port"];
         unsigned short gate_port = atoi(gate_port_str.c_str());
 

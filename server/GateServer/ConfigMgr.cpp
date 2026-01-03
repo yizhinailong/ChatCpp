@@ -75,3 +75,8 @@ SectionInfo ConfigMgr::operator[](const std::string& section) {
     }
     return m_config_map[section];
 }
+
+ConfigMgr& ConfigMgr::GetInstance() {
+    static ConfigMgr instance;
+    return instance;
+}

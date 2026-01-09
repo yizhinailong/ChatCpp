@@ -1,7 +1,0 @@
-#error_tip[state = 'normal'] {
-    color : green;
-}
-
-#error_tip[state = 'error'] {
-    color : red;
-}

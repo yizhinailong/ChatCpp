@@ -1,12 +1,12 @@
 ## 邮箱验证服务联调
 
-我们启动GateServer和VarifyServer
+我们启动GateServer和VerifyServer
 
 我们启动客户端，点击注册按钮进入注册界面，输入邮箱并且点击获取验证码
 
 ![https://cdn.llfc.club/1710646053282.jpg](https://cdn.llfc.club/1710646053282.jpg)
 
-GateServer收到Client发送的请求后，会调用grpc 服务 访问VarifyServer，VarifyServer会随机生成验证码，并且调用邮箱模块发送邮件给指定邮箱。而且把发送的结果给GateServer，GateServer再将消息回传给客户端。
+GateServer收到Client发送的请求后，会调用grpc 服务 访问VerifyServer，VerifyServer会随机生成验证码，并且调用邮箱模块发送邮件给指定邮箱。而且把发送的结果给GateServer，GateServer再将消息回传给客户端。
 
 ## 设置验证码过期
 
@@ -805,4 +805,4 @@ bool RedisMgr::Get(const std::string& key, std::string& value)
 ## 总结
 
 本节告诉大家如何搭建redis服务，linux和windows环境的，并且编译了windows版本的hredis库，解决了链接错误，而且封装了RedisMgr管理类。
-并实现了测试用例，大家感兴趣可以测试一下。下一节实现VarifyServer访问的redis功能。
+并实现了测试用例，大家感兴趣可以测试一下。下一节实现VerifyServer访问的redis功能。

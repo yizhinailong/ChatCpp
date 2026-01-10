@@ -17,6 +17,7 @@ public:
 
 private slots:
     void on_verify_button_clicked();
+    void on_sure_button_clicked();
     void slot_register_mod_finish(RequestId id, QString res, ErrorCodes error);
 
 private:

@@ -55,5 +55,5 @@ win32:CONFIG(debug, debug | release) {
     OutputDir =  $${OUT_PWD}/$${DESTDIR}
     OutputDir = $$replace(OutputDir, /, \\)
     //执行copy命令
-    QMAKE_POST_LINK += copy /Y \"$$TargetConfig\" \"$$OutputDir\"
+    QMAKE_POST_LINK +=cp -f \"$$TargetConfig\" \"$$OutputDir\"
 }

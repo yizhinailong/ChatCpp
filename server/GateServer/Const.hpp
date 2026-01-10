@@ -21,8 +21,13 @@ namespace net = boost::asio;      // from <boost/asio.hpp>
 
 using tcp = boost::asio::ip::tcp; // from <boost/asio/ip/tcp.hpp>
 
+const std::string CODEPREFIX = "code_";
+
 enum class ErrorCode : std::uint16_t {
     SUCCESS,
     ERROR_JSON,
     RPCFAILED,
+    VERIFY_EXPIRED,
+    USER_EXIST,
+    VERIFY_CODE_ERROR,
 };

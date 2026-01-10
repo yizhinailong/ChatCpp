@@ -1,65 +1,66 @@
 ## 注册功能
-实现注册功能，先实现客户端发送post请求, 将注册ui中确定按钮改为sure_btn，并为其添加click槽函数
+实现注册功能，先实现客户端发送post请求, 将注册ui中确定按钮改为`sure_button`，并为其添加click槽函数
 ``` cpp
-//day11 添加确认槽函数
-void RegisterDialog::on_sure_btn_clicked()
-{
-    if(ui->user_edit->text() == ""){
-        showTip(tr("用户名不能为空"), false);
+void RegisterDialog::on_sure_button_clicked() {
+    if (ui->user_edit->text() == "") {
+        ShowTip(tr("用户名不能为空"), false);
         return;
     }
 
-    if(ui->email_edit->text() == ""){
-        showTip(tr("邮箱不能为空"), false);
+    if (ui->email_edit->text() == "") {
+        ShowTip(tr("邮箱不能为空"), false);
         return;
     }
 
-    if(ui->pass_edit->text() == ""){
-        showTip(tr("密码不能为空"), false);
+    if (ui->passwd_edit->text() == "") {
+        ShowTip(tr("密码不能为空"), false);
         return;
     }
 
-    if(ui->confirm_edit->text() == ""){
-        showTip(tr("确认密码不能为空"), false);
+    if (ui->confirm_passwd_edit->text() == "") {
+        ShowTip(tr("确认密码不能为空"), false);
         return;
     }
 
-    if(ui->confirm_edit->text() != ui->pass_edit->text()){
-        showTip(tr("密码和确认密码不匹配"), false);
+    if (ui->passwd_edit->text() != ui->confirm_passwd_edit->text()) {
+        ShowTip(tr("密码和确认密码不匹配"), false);
         return;
     }
 
-    if(ui->varify_edit->text() == ""){
-        showTip(tr("验证码不能为空"), false);
+    if (ui->verify_edit->text() == "") {
+        ShowTip(tr("验证码不能为空"), false);
         return;
     }
 
-    //day11 发送http请求注册用户
     QJsonObject json_obj;
     json_obj["user"] = ui->user_edit->text();
     json_obj["email"] = ui->email_edit->text();
-    json_obj["passwd"] = ui->pass_edit->text();
-    json_obj["confirm"] = ui->confirm_edit->text();
-    json_obj["varifycode"] = ui->varify_edit->text();
-    HttpMgr::GetInstance()->PostHttpReq(QUrl(gate_url_prefix+"/user_register"),
-                 json_obj, ReqId::ID_REG_USER,Modules::REGISTERMOD);
+    json_obj["passwd"] = ui->passwd_edit->text();
+    json_obj["confirm"] = ui->confirm_passwd_edit->text();
+    json_obj["verifycode"] = ui->verify_edit->text();
+    HttpMgr::GetInstance()->PostHttpRequest(
+        QUrl(gate_url_prefix + "/user_register"),
+        json_obj,
+        RequestId::ID_REGISTER_USER,
+        Modules::REGISTER_MODULE);
 }
 ```
-再添加http请求回复后收到处理流程
+再添加`http`请求回复后收到处理流程
 ``` cpp
 void RegisterDialog::initHttpHandlers()
 {
     //...省略
     //注册注册用户回包逻辑
-    _handlers.insert(ReqId::ID_REG_USER, [this](QJsonObject jsonObj){
-        int error = jsonObj["error"].toInt();
-        if(error != ErrorCodes::SUCCESS){
-            showTip(tr("参数错误"),false);
+    m_handlers.insert(RequestId::ID_REGISTER_USER, [this](const QJsonObject& json_obj) {
+        int error = json_obj["error"].toInt();
+        if (static_cast<ErrorCodes>(error) != ErrorCodes::SUCCESS) {
+            ShowTip(tr("参数错误"), false);
             return;
         }
-        auto email = jsonObj["email"].toString();
-        showTip(tr("用户注册成功"), true);
-        qDebug()<< "email is " << email ;
+
+        auto email = json_obj["email"].toString();
+        ShowTip(tr("用户注册成功"), true);
+        qDebug() << "Email is " << email;
     });
 }
 ```

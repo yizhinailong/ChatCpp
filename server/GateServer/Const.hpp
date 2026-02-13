@@ -4,6 +4,7 @@
 #include <iostream>
 #include <map>
 #include <memory>
+#include <queue>
 
 #include <json/json.h>
 #include <json/reader.h>

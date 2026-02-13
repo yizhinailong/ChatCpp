@@ -18,7 +18,7 @@ AccessModifierOffset: -4
 
 #—————————————————————————————————————4————————————————————————————————————————————————————#
 # 开括号(开圆括号、开尖括号、开方括号)后的对齐: Align, DontAlign, AlwaysBreak(总是在开括号后换行)
-AlignAfterOpenBracket: Align
+AlignAfterOpenBracket: BlockIndent
 #————————————————————————————————————————————————————#
 # Align，在开括号之后对齐变量:
 
